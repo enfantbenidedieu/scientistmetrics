@@ -1,4 +1,4 @@
-# scientistmetrics : python package for calculating correlation amongst categorical variables
+# scientistmetrics
 
 ## About scientistmetrics
 
