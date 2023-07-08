@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from scipy.stats.contingency import association
-from scipy.stats import chi2_contingency
-from pandas import DataFrame, crosstab
-from numpy import eye
+import scipy.stats as st
+import numpy as np
+import pandas as pd
 from itertools import combinations
-from matplotlib import pyplot
+import plotnine as pn
 import seaborn as sns
+from ggcorrplot import get_melt, no_panel
 
-def scientistmetrics(X,method="cramer",correction=False,lambda_ = None,plot=False,**kwargs):
+def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
     """Compute the degree of association between two nomila variables and return a DataFrame
 
     Parameters
@@ -16,7 +16,7 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None,plot=Fals
     X : DataFrame.
         Observed values
     
-    method : {"chi2","cramer","tschuprow","pearson"} (default = "cramer")
+    method : {"chi2","phi","gtest","cramer","tschuprow","pearson"} (default = "cramer")
         The association test statistic.
     
     correction : bool, optional
@@ -31,13 +31,13 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None,plot=Fals
         value of the test statistic   
     """
     # Chack if X is an instance of class
-    if not isinstance(X,DataFrame):
+    if not isinstance(X,pd.DataFrame):
         raise TypeError(f"{type(X)} is not supported. Please convert to a DataFrame with "
                         "pd.DataFrame. For more information see: "
                         "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html")
     
-    if method not in ["chi2","phi","cramer","tschuprow","pearson"]:
-        raise ValueError("Error : Valid method are 'chi2','phi','cramer','tschuprow' or pearson.")
+    if method not in ["chi2","phi","gtest","cramer","tschuprow","pearson"]:
+        raise ValueError("Error : Valid method are 'chi2','phi','gtest','cramer','tschuprow' or pearson.")
     
     # Extract catehorical columns
     cat_columns = X.select_dtypes(include=["category","object"]).columns
@@ -53,7 +53,11 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None,plot=Fals
 
     # fill matrix with zeros, except for the main diag (which will
     # be always equal to one)
-    matrix = DataFrame(eye(len(cat_columns)),columns=cat_columns,index=cat_columns)
+    matrix = pd.DataFrame(np.eye(len(cat_columns)),columns=cat_columns,index=cat_columns)
+
+    # log - likelihood
+    if method == "gtest":
+        lambda_ = "log-likelihood"
 
     # note that because we ignore redundant combinations,
     # we perform half the calculations, so we get the results
@@ -63,23 +67,40 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None,plot=Fals
         j = comb[1]
 
         # make contingency table
-        input_tab = crosstab(X[i],X[j])
+        input_tab = pd.crosstab(X[i],X[j])
 
         # Chi2 contingency
-        if method == "chi2":
-            res_association = chi2_contingency(input_tab,correction=correction,lambda_=lambda_)[0]
+        if method in ["chi2","gtest"]:
+            res_association = st.chi2_contingency(input_tab,correction=correction,lambda_=lambda_)[0]
         elif method == "phi":
-            res_association = chi2_contingency(input_tab,correction=correction,lambda_=lambda_)[0]/input_tab.sum().sum()
+            res_association = st.chi2_contingency(input_tab,correction=correction,lambda_=lambda_)[0]/input_tab.sum().sum()
         else:
-            res_association = association(input_tab, method=method,correction=correction,lambda_=lambda_)
+            res_association = st.contingency.association(input_tab, method=method,correction=correction,lambda_=lambda_)
 
         matrix[i][j], matrix[j][i] = res_association, res_association
-    
-    if plot:
-        sns.heatmap(matrix,**kwargs)
-        pyplot.show()
 
-    
     return matrix
+
+def ggheatmap(X,):
+    """
+    
+    
+    """
+    
+    if not isinstance(X,pd.DataFrame):
+        raise ValueError("Error : 'x' must be a DataFrame.")
+    
+    # 
+    
+
+
+def plot_association_matrix(matrix,**kwargs):
+    """
+    
+    """
+    p = sns.heatmap(matrix,**kwargs)
+
+    return p
+
 
         

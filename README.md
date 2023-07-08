@@ -2,7 +2,7 @@
 
 ## About scientistmetrics
 
-**scientistmetrics** is a `Python` python package for calculating correlation amongst categorical variables
+**scientistmetrics** is a `Python` python package for calculating correlation amongst categorical variables.
 
 ## Why scientistmetrics?
 
