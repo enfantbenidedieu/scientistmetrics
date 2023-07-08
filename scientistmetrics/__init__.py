@@ -5,4 +5,4 @@
 from __future__ import absolute_import
 
 from scientistmetrics.association import scientistmetrics
-from scientistmetrics.association import plot_association_matrix
+from scientistmetrics.association import ggheatmap

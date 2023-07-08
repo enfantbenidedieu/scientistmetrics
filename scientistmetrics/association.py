@@ -6,7 +6,13 @@ import pandas as pd
 from itertools import combinations
 import plotnine as pn
 import seaborn as sns
-from ggcorrplot import get_melt, no_panel
+from ggcorrplot import (
+    get_melt, 
+    no_panel,
+    remove_diag,
+    match_arg,
+    get_lower_tri,
+    get_upper_tri)
 
 def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
     """Compute the degree of association between two nomila variables and return a DataFrame
@@ -30,7 +36,7 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
     statistic : DataFrame
         value of the test statistic   
     """
-    # Chack if X is an instance of class
+    # Check if X is an instance of class
     if not isinstance(X,pd.DataFrame):
         raise TypeError(f"{type(X)} is not supported. Please convert to a DataFrame with "
                         "pd.DataFrame. For more information see: "
@@ -81,26 +87,119 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
 
     return matrix
 
-def ggheatmap(X,):
+def ggheatmap(X,
+              method = "square",
+              type = "full",
+              show_diag = None,
+              limit = None,
+              title = None,
+              show_legend = True,
+              legend_title = "association",
+              colors = ["red","blue"],
+              outline_color = "gray",
+              lab = False,
+              lab_col = "black",
+              lab_size = 11,
+              tl_cex = 12,
+              tl_col = "black",
+              tl_srt = 45,
+              digits = 2,
+              ggtheme = pn.theme_minimal()):
     """
     
     
     """
     
     if not isinstance(X,pd.DataFrame):
-        raise ValueError("Error : 'x' must be a DataFrame.")
-    
-    # 
-    
+        raise TypeError(f"{type(X)} is not supported. Please convert to a DataFrame with "
+                        "pd.DataFrame. For more information see: "
+                        "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html")
+    #
 
+    # set argument
+    type = match_arg(type, ["full","lower","upper"])
+    method = match_arg(method,["square",'circle'])
 
-def plot_association_matrix(matrix,**kwargs):
-    """
+    #
+    if show_diag is None:
+        if type == "full":
+            show_diag = True
+        else:
+            show_diag = False
+
+    # Round elements
+    X = X.round(decimals=digits)
+
+    #
+    if not show_diag:
+        X = remove_diag(X)
+
+    # Get lower or upper triangle
+    if type == "lower":
+        X = get_lower_tri(X,show_diag)
+    elif type == "upper":
+        X = get_upper_tri(X,show_diag)
+
+    # Melt corr and p_mat
+    X.columns = pd.Categorical(X.columns,categories=X.columns)
+    X.index = pd.Categorical(X.columns,categories=X.columns)
+    X = get_melt(X)
+
+    # Initialize
+    p = pn.ggplot(X,pn.aes(x="Var1",y="Var2",fill="value"))
+
+    # Modification based on method
+    if method == "square":
+        p = p + pn.geom_tile(color=outline_color)
+    elif method == "circle":
+        p = p+pn.geom_point(pn.aes(size="abs_corr"),
+                            color=outline_color,
+                            shape="o")+pn.scale_size_continuous(range=(4,10))+pn.guides(size=None)
     
-    """
-    p = sns.heatmap(matrix,**kwargs)
+    # Set limit
+    if limit is None:
+        limit = [np.min(X["value"]),np.max(X["value"])]
+    
+    # Adding colors
+    p = p + pn.scale_fill_gradient(
+        low = colors[0],
+        high = colors[1],
+        name = legend_title
+    )
+
+    # depending on the class of the object, add the specified theme
+    p = p + ggtheme
+
+    p =p+pn.theme(
+        axis_text_x=pn.element_text(angle=tl_srt,
+                                    va="center",
+                                    size=tl_cex,
+                                    ha="center",
+                                    color=tl_col),
+        axis_text_y=pn.element_text(size=tl_cex)
+    ) + pn.coord_fixed()
+
+    label = X["value"].round(digits)
+
+    # matrix cell labels
+    if lab:
+        p = p + pn.geom_text(mapping=pn.aes(x="Var1",y="Var2"),
+                             label = label,
+                             color=lab_col,
+                             size=lab_size)
+    
+    if title is not None:
+        p = p + pn.ggtitle(title=title)
+    
+    # Removing legend
+    if not show_legend:
+        p =p+pn.theme(legend_position=None)
+    
+    # Removing panel
+    p = p + no_panel()
 
     return p
 
+    
 
         
