@@ -39,3 +39,7 @@ You can install scientistmetrics using `pip` :
 ```
 pip install scientistmetrics
 ```
+
+## Author
+
+Duvérier DJIFACK ZEBAZE
