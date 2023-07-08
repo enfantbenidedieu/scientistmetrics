@@ -22,7 +22,7 @@ Notebook is availabled.
 
 ### Dependencies
 
-`scientistmetrics` requires :
+scientistmetrics requires :
 
 ```
 Python >=3.10
