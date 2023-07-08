@@ -1,4 +1,4 @@
-# scientistmetrics : Python library for measure the degree of association
+# scientistmetrics : python package for calculating correlation amongst categorical variables
 
 ## About scientistmetrics
 
@@ -14,4 +14,28 @@ The function provides the option for computing one of six measures of associatio
 * G-test: https://en.wikipedia.org/wiki/G-test
 * Cramer's V : https://en.wikipedia.org/wiki/Cramer's_V
 * Tschuprow's T : https://en.wikipedia.org/wiki/Tschuprow's_T
-* Pearson contingency coefficient : 
+* Pearson contingency coefficient : https://www.statisticshowto.com/contingency-coefficient/
+
+Notebook is availabled.
+
+## Installation
+
+### Dependencies
+
+`scientistmetrics` requires :
+
+```
+Python >=3.10
+Numpy >=1.23.5
+Pandas >=1.5.3
+Plotnine >=0.10.1
+Scipy >=1.10.1
+```
+
+## User installation
+
+You can install scientistmetrics using `pip` :
+
+```
+pip install scientistmetrics
+```

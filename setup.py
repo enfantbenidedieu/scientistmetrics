@@ -12,7 +12,7 @@ setuptools.setup(
     version="0.0.1",
     author="Duverier DJIFACK ZEBAZE",
     author_email="duverierdjifack@gmail.com",
-    description="Python module for measure the degree of association between variables",
+    description="Python package for calculating correlation amongst categorical variables",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/enfantbenidedieu/scientistmetrics",
