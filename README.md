@@ -2,7 +2,7 @@
 
 ## About scientistmetrics
 
-**scientistmetrics** is a `Python` package for measure the degree of association between qualitatives/categoricales variables.
+**scientistmetrics** is a `Python` python package for calculating correlation amongst categorical variables
 
 ## Why scientistmetrics?
 

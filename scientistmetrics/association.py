@@ -5,8 +5,10 @@ from scipy.stats import chi2_contingency
 from pandas import DataFrame, crosstab
 from numpy import eye
 from itertools import combinations
+from matplotlib import pyplot
+import seaborn as sns
 
-def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
+def scientistmetrics(X,method="cramer",correction=False,lambda_ = None,plot=False,**kwargs):
     """Compute the degree of association between two nomila variables and return a DataFrame
 
     Parameters
@@ -34,8 +36,8 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
                         "pd.DataFrame. For more information see: "
                         "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html")
     
-    if method not in ["chi2","cramer","tschuprow","pearson"]:
-        raise ValueError("Error : Valid method are 'chi2', 'cramer','tschuprow' or pearson.")
+    if method not in ["chi2","phi","cramer","tschuprow","pearson"]:
+        raise ValueError("Error : Valid method are 'chi2','phi','cramer','tschuprow' or pearson.")
     
     # Extract catehorical columns
     cat_columns = X.select_dtypes(include=["category","object"]).columns
@@ -66,10 +68,17 @@ def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
         # Chi2 contingency
         if method == "chi2":
             res_association = chi2_contingency(input_tab,correction=correction,lambda_=lambda_)[0]
+        elif method == "phi":
+            res_association = chi2_contingency(input_tab,correction=correction,lambda_=lambda_)[0]/input_tab.sum().sum()
         else:
             res_association = association(input_tab, method=method,correction=correction,lambda_=lambda_)
 
         matrix[i][j], matrix[j][i] = res_association, res_association
+    
+    if plot:
+        sns.heatmap(matrix,**kwargs)
+        pyplot.show()
+
     
     return matrix
 
