@@ -4,5 +4,5 @@
 """
 from __future__ import absolute_import
 
-from scientistmetrics.association import scientistmetrics
-from scientistmetrics.association import ggheatmap
+from .association import scientistmetrics
+from .association import ggheatmap
