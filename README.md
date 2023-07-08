@@ -6,8 +6,6 @@
 
 ## Why scientistmetrics?
 
-The project started due to the lack of reliable source code to calculate degree of association between two nominal variables.
-
 The function provides the option for computing one of six measures of association between two nominal variables from the data given in a 2d contingency table: 
 * Pearson's chi-squared test : https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test
 * Phi coefficient : https://en.wikipedia.org/wiki/Phi_coefficient
