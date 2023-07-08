@@ -1,63 +1,57 @@
-
+# -*- coding: utf-8 -*-
 
 from pandas import DataFrame, crosstab
 from scipy.stats.contingency import association
 from pandas import DataFrame, crosstab
-from numpy import sqrt, zeros, eye
+from numpy import eye
 from itertools import combinations
 
-class PairWisemetrics:
-    
-    def __init__(self, dataframe, copy = True):
-        '''
-        Class initialization, it serves as a base class for all the metrics
 
-        Parameters
-        ----------
-        dataframe : pandas.DataFrame
-            Pandas dataframe containing the variables
-            of interest to measure the degree of association.
-
-        Returns
-        -------
-        None.
-        '''
-        if isinstance(dataframe, DataFrame):
-        
-            if copy:
-                self.data = dataframe.copy()
-            else:
-                self.data = dataframe
-                
-        else:
-            raise TypeError("dataframe must be an instance of a pd.DataFrame")
-    
-class catassociation(PairWisemetrics):
+class catassociation:
     """
     
     
     """
     
-    def __init__(self, dataframe, method="cramer"):
-        PairWisemetrics.__init__(self, dataframe)
-        self.matrix = None
+    def __init__(self,method="cramer", correction=False,lambda_ = None):
         self.method = method
+        self.correction = correction
+        self.lambda_ = lambda_
+    
+    def fit(self,X):
+        """
+        
+        """
 
-    def select_variables(self):
-        '''
-        Selects all category variables
+        if not isinstance(X, DataFrame):
+            raise TypeError("Error : 'X' must be an instance of a pd.DataFrame")
+        
+        self.matrix = None
 
-        Returns
-        -------
-        None.
+        # Compute statistics
+        self._compute_stats(X=X)
 
-        '''
-        self.cat_columns = self.data.select_dtypes(include=['category']).columns
+        return self.matrix
+    
+    def _compute_stats(self,X):
+        """
+        
+        
+        """
 
-        if len(self.cat_columns)==0:
+        cat_columns = X.select_dtypes(include=['category']).columns
+
+        if len(cat_columns)==0:
             raise KeyError("No categorical variables found")
+        
+        n = len(cat_columns)
 
-    def init_pairwisematrix(self):
+        # get all possible pair-wise combinations in the columns list
+        # this assumes that A-->B equals B-->A so we don't need to
+        # calculate the same thing twice
+        # we also never get "A --> A"
+        all_combinations = combinations(cat_columns, r=2)
+
         '''
         init a square matrix n x n fill with zeros,
         where n is the total number of categorical variables
@@ -70,28 +64,7 @@ class catassociation(PairWisemetrics):
         '''
         # fill matrix with zeros, except for the main diag (which will
         # be always equal to one)
-        self.matrix = DataFrame(
-            eye(len(self.cat_columns)),
-            columns=self.cat_columns,
-            index=self.cat_columns
-        )
-
-    def fill_pairwisematrix(self):
-        '''
-        fills the square matrix using scipy's association method
-
-        Returns
-        -------
-        None.
-
-        '''
-        
-        n = len(self.cat_columns)
-        # get all possible pair-wise combinations in the columns list
-        # this assumes that A-->B equals B-->A so we don't need to
-        # calculate the same thing twice
-        # we also never get "A --> A"
-        all_combinations = combinations(self.cat_columns, r=2)
+        self.matrix = DataFrame(eye(len(self.cat_columns)),columns=self.cat_columns,index=self.cat_columns)
 
         # note that because we ignore redundant combinations,
         # we perform half the calculations, so we get the results
@@ -101,24 +74,8 @@ class catassociation(PairWisemetrics):
             j = comb[1]
 
             # make contingency table
-            input_tab = crosstab(self.data[i], self.data[j])
+            input_tab = crosstab(X[i],X[j])
 
             # find the resulting categorical association value using scipy's association method
-            res_association = association(input_tab, method=self.method)
+            res_association = association(input_tab, method=self.method,correction=self.correction,lambda_=self.lambda_)
             self.matrix[i][j], self.matrix[j][i] = res_association, res_association
-
-    def fit(self):
-        '''
-        Creates a pairwise matrix filled with categories association
-        where columns and index are the categorical
-        variables of the passed pandas.DataFrame
-
-        Returns
-        -------
-        statistic matrix.
-        '''
-        self.select_variables()
-        self.init_pairwisematrix()
-        self.fill_pairwisematrix()
-
-        return self.matrix
