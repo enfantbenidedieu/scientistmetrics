@@ -14,7 +14,7 @@ from ggcorrplot import (
     get_upper_tri)
 
 def scientistmetrics(X,method="cramer",correction=False,lambda_ = None):
-    """Compute the degree of association between two nomila variables and return a DataFrame
+    """Compute the degree of association between two nominales variables and return a DataFrame
 
     Parameters
     ----------
