@@ -9,7 +9,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="scientistmetrics", 
-    version="0.0.1",
+    version="0.0.2",
     author="Duverier DJIFACK ZEBAZE",
     author_email="duverierdjifack@gmail.com",
     description="Python package for calculating correlation amongst categorical variables",
