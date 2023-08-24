@@ -38,20 +38,31 @@ def powersetmodel(DTrain=pd.DataFrame,
                   num_from=None,
                   num_to=None):
     """
+    This function return all subsets models giving a set of variables.
 
     Parameters
     ----------
     DTrain : DataFrame
             Training sample
-    
     DTest : DataFrame, default = None
             Test sample
-        
-    model_type : str
-    target : target name
-    
-    
-    
+    split_data : bool, default= True. If Data should be split in train set and test set. Used if DTest is not None. 
+    model_type : {"linear","logistic"}, default = "linear".
+    target : target name,
+    test_size : float or int, default=None
+                 If float, should be between 0.0 and 1.0 and represent the proportion of the dataset to include in 
+                 the test split. If int, represents the absolute number of test samples. If None, the value is set 
+                 to the complement of the train size. If train_size is also None, it will be set to 0.25.
+                 See : "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"
+    random_state : int, RandomState instance or None, default=None
+                   Controls the shuffling applied to the data before applying the split. 
+                   Pass an int for reproducible output across multiple function calls. 
+                   See "https://scikit-learn.org/stable/glossary.html#term-random_state"
+    shuffle : bool, default=True
+               Whether or not to shuffle the data before splitting. If shuffle=False then stratify must be None.
+    stratify : array-like, default=None.
+               If not None, data is split in a stratified fashion, using this as the class labels. 
+               Read more in the "https://scikit-learn.org/stable/modules/cross_validation.html#stratification"
     """
 
     # Set testing samples
