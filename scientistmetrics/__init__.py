@@ -3,7 +3,5 @@
 @author: enfantbenidedieu
 """
 from __future__ import absolute_import
-
-from .association import scientistmetrics
-from .association import ggheatmap
-from .model import powersetmodel
+from .association import scientistmetrics, ggheatmap
+from .powerset import powersetmodel
