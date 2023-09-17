@@ -1,15 +1,14 @@
 
 # -*- coding: utf-8 -*-
 import math
-import seaborn as sns
 import numpy as np
 import pandas as pd
 import pingouin as pg
 import scipy.stats as st
-from scipy.interpolate import UnivariateSpline
 import matplotlib.pyplot as plt
 import warnings as warnings
 import collections
+import plotnine as pn
 # sklearn
 from sklearn import metrics
 from sklearn.preprocessing import LabelBinarizer
@@ -24,18 +23,29 @@ import statsmodels.stats.stattools as stattools
 import statsmodels.stats.diagnostic as diagnostic
 
 # Lag function
-def lag(x,n):
+def lag(x,n=1):
     """
+    Lag a Time Series
+
+    Compute a lagged version of a time series, shifting the time base back by a given number of observations.
+
+    Parameters:
+    -----------
+    x : A vector or matrix or univariate time series
+    n : int, default=1
+        the number of lags (in units of observations)
     
-    
+    Return:
+    --------
+    Returns suitably shifted 
     """
     if n==0:
         return x
     elif isinstance(x,pd.Series):
-        return x.shift(n)
+        return x.shift(periods=n)
     elif isinstance(x,np.array):
         x = pd.Series(x)
-        return x.shift(n)
+        return x.shift(periods=n)
     else:
         x = x.copy()
         x[n:] = x[0:-n]
@@ -43,16 +53,24 @@ def lag(x,n):
         return x
 
 # Diff Function
-def diff(x):
+def diff(x,lags=1):
     """
-    
-    
+    Lagged Differences
+
+    Parameters
+    ----------
+    x : Series or 1D-array
+
+    Return
+    ------
+    Returns suitably lagged 
     """
     if isinstance(x,pd.Series):
-        return x.diff()
+        x = x
     else:
         x = pd.Series(x)
-        return x.diff()
+    
+    return x.diff(periods=lags)
 
 # Extract AIC
 def extractAIC(self):
@@ -84,7 +102,8 @@ def extractBIC(self):
     return self.bic
 
 def extractAICC(self):
-    r"""Akaike information criterion with correction.
+    """
+    Akaike information criterion with correction.
 
     Parameters
     ----------
@@ -102,10 +121,10 @@ def extractAICC(self):
     k = len(self.params)
     return eval_measures.aicc(llf=llf,nobs=nobs,df_modelwc=k)
 
-
 # Extract coefficients
 def coefficients(self):
-    r"""Coefficients of model.
+    """
+    Coefficients of model.
 
     Parameters:
     -----------
@@ -119,10 +138,12 @@ def coefficients(self):
 
 # Log-likelihood of model
 def logLik(self):
-    r"""Log-likelihood of model
+    """
+    Log-likelihood of model
 
     Parameters:
     -----------
+    self : an object for which the extraction of log-likelihood is meaningful.
 
     Return
     ------
@@ -131,14 +152,16 @@ def logLik(self):
     """
     return self.llf
 
-def likelihoodratiotest(full_model,reduce_model=None):
-    r"""Likelihood Ratio Test
+def LikelihoodRatioTest(full_model,reduced_model=None):
+    """
+    Likelihood Ratio Test
+
+     A likelihood ratio test compares the goodness of fit of two nested regression models.
 
     Parameters:
     -----------
-    full_model : 
-    reduce_model
-
+    full_model : The complex model
+    reduced_model : A reduced model is simply one that contains a subset of the predictor variables in the overall regression model, default = None.
 
     Return:
     -------
@@ -148,8 +171,34 @@ def likelihoodratiotest(full_model,reduce_model=None):
             Degree of freedom
     pvalue : float
             The chi-squared probability of getting a log-likelihood ratio statistic greater than statistic.
+    
+    Notes:
+    ------
+    Likelihood Ratio Test in R, The likelihood-ratio test in statistics compares the goodness of fit of two 
+    nested regression models based on the ratio of their likelihoods, specifically one obtained by maximization 
+    over the entire parameter space and another obtained after imposing some constraint.
+
+    A nested model is simply a subset of the predictor variables in the overall regression model.
+    For instance, consider the following regression model with four predictor variables.
+    y = b0 + b1*x1 + b2*x2 + b3*x3 + b4*x4 + e
+
+    The following model, with only two of the original predictor variables, is an example of a nested model.
+    y = b0 + b1*x1 + b2*x2 + e
+
+    To see if these two models differ significantly, we can use a likelihood ratio test with the following null and alternative hypotheses.
+    Hypothesis :
+    H0: Both the full and nested models fit the data equally well. As a result, you should employ the nested model.
+    H1: The full model significantly outperforms the nested model in terms of data fit. As a result, you should use the entire model.
+
+    The test statistic for the LRT follows a chi-squared distribution with degrees of freedom equal to the difference in dimensionality of your models. 
+    The equation for the test statistic is provided below:
+    -2 * [loglikelihood(nested)-loglikelihood(complex)]
+
+    If the p-value of the test is less than a certain threshold of significance (e.g., 0.05), we can reject the null hypothesis and 
+    conclude that the full model provides a significantly better fit.
+
     """
-    if reduce_model is None:
+    if reduced_model is None:
         if full_model.model.__class__ == smt.regression.linear_model.OLS:
             # Null Model
             dataset = pd.DataFrame({full_model.model.endog_names : full_model.model.endog})
@@ -168,19 +217,22 @@ def likelihoodratiotest(full_model,reduce_model=None):
             return  Result(statistic=full_model.llr,pvalue=full_model.llr_pvalue)
     else:
         # Deviance statistic
-        lr_statistic = -2*(reduce_model.llf - full_model.llf)
+        lr_statistic = -2*(reduced_model.llf - full_model.llf)
         # degree of freedom
-        df_denom = reduce_model.df_resid - full_model.df_resid
+        df_denom = reduced_model.df_resid - full_model.df_resid
         # Critical Probability
         pvalue = st.chi2.sf(lr_statistic,df_denom)
         # Store all informations
         Result = collections.namedtuple("LikelihoodRatioTestResult",["statistic","df_denom","pvalue"],rename=False)
         return Result(statistic=lr_statistic,df_denom=df_denom,pvalue=pvalue) 
 
-
 # https://github.com/TristanFauvel/Hosmer-Lemeshow/blob/master/HosmerLemeshow.py
-def hosmerlemeshowtest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
-    r"""Hosmer-Lemeshow goodness of fit test
+# https://www.bookdown.org/rwnahhas/RMPH/blr-gof.html
+def HosmerLemeshowTest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
+    """
+    Hosmer-Lemeshow goodness of fit test
+
+    See https://en.wikipedia.org/wiki/Hosmer%E2%80%93Lemeshow_test
 
     Parameters
     ----------
@@ -192,6 +244,10 @@ def hosmerlemeshowtest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
     -------
     result : the result of the test, including Chi2-HL statistics and p-value 
 
+    References:
+    -----------
+    Hosmer, D. W., Jr., S. A. Lemeshow, and R. X. Sturdivant. 2013. Applied Logistic Regression. 3rd ed. Hoboken, NJ: Wiley.
+    Hosmer, David W., and Stanley Lemeshow. 2000. Applied Logistic Regression. Second edtion. New York: John Wiley & Sons.
     """
     if self is None:
         if (y_true is not None) and (y_prob is not None):
@@ -225,13 +281,28 @@ def hosmerlemeshowtest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
     # Probabilité critique
     pvalue = st.chi2.sf(hl_statistic,df_denom)
     # Store all informations
-    Result = collections.namedtuple("HosmerLemeshowTestResult",["statistic","df_denom","pvalue"],rename=False)
+    Result = collections.namedtuple("HosmerLemeshowResult",["statistic","df_denom","pvalue"],rename=False)
     return Result(statistic=hl_statistic,df_denom=df_denom,pvalue=pvalue) 
 
-def mannwhitneytest(self=None, y_true=None, y_prob=None):
+# Mann Whitney Test
+def MannWhitneyTest(self=None, y_true=None, y_prob=None):
     """
-    
-    
+    Mann - Whitney Test
+
+    Parameters:
+    -----------
+    self : an instance of class Logit, default=None.
+    ytrue : array of int, default = None.
+            The outcome label (e.g. 1 or 0)
+    yprob : array of float, default = None.
+            The predicted outcome probability
+
+    Return:
+    -------
+    statistic : float
+                Mann Whitney statistic
+    pvalue : float
+            The normal critical probability
     """
     if self is None:
         if (y_true is not None) and (y_prob is not None):
@@ -263,14 +334,15 @@ def mannwhitneytest(self=None, y_true=None, y_prob=None):
     # Pvalue
     pvalue = st.norm.sf(mn_statistic)
     # Store all informations
-    Result = collections.namedtuple("MannWhitneyTestResult",["statistic","pvalue"],rename=False)
+    Result = collections.namedtuple("MannWhitneyResult",["statistic","pvalue"],rename=False)
     return Result(statistic=mn_statistic,pvalue=pvalue) 
 
 ######################################################################## Residuals for models ##############################################################
 
 # Model Residualss
 def residuals(self,choice=None):
-    r"""Model Residuals
+    """
+    Model Residuals
 
     Parameters
     ----------
@@ -362,7 +434,7 @@ def rstandard(self,choice=None):
 
 # Studentized residuals    
 def rstudent(self):
-    r"""
+    """
     Studentized residuals
 
     Parameters
@@ -399,7 +471,7 @@ def rstudent(self):
 
 # Explained Variance Score
 def explained_variance_score(self=None,y_true=None,y_pred=None):
-    r"""
+    """
     Explained Variance Ratio regression score function.
 
     Best possible score is 1.0, lower values are worse.
@@ -426,13 +498,13 @@ def explained_variance_score(self=None,y_true=None,y_pred=None):
             ytrue = self.model.endog
             ypred = self.predict()
         else:
-            raise ValueError(f"Error : no applicable method for 'explained_variance_ratio' applied to an object of class {self.model.__class__}.")
+            raise ValueError("Error : 'explained_variance_ratio' only applied to an object of class OLS.")
 
     return metrics.explained_variance_score(y_true=ytrue,y_pred=ypred)
 
-# R^2 adnd adjusted R^2.
+# R^2 and adjusted R^2.
 def r2_score(self=None,y_true=None,y_pred=None,adjust=False):
-    r"""
+    """
     $R^2$ (coefficient of determination) regression score function.
 
     Parameters:
@@ -442,13 +514,14 @@ def r2_score(self=None,y_true=None,y_pred=None,adjust=False):
             Ground truth (correct) target values.
     y_pred : array-like of shape (n_samples,)
             Estimated target values.
-    adjust : boolean, default = None.
+    adjust : bool, default = False.
+            if False, returns r2 score, if True returns adjusted r2 score.
     
-    Return:
+    Returns:
     ------
-    r2_score : float
+    z : float
+        The r2 score or adjusted r2 score.      
     """
-
     if adjust is False:
         if self is None:
             if (y_true is not None) and (y_pred is not None):
@@ -457,18 +530,18 @@ def r2_score(self=None,y_true=None,y_pred=None,adjust=False):
             if self.model.__class__ == smt.regression.linear_model.OLS:
                 return self.rsquared
             else:
-                raise ValueError(f"Error : no applicable method for 'r2_score' applied to an object of class {self.model.__class__}.")
+                raise ValueError("Error : 'r2_score' only applied to an object of class OLS.")
     else:
         if self is None:
             raise ValueError("Error : `adjust` is only for training model.")
         
         if self.model.__class__ != smt.regression.linear_model.OLS:
-            raise ValueError(f"Error : no applicable method for 'r2_score' applied to an object of class {self.model.__class__}.")
+            raise ValueError("Error : 'r2_score' only applied to an object of class OLS.")
         return self.rsquared_adj
 
 # Mean Squared Error/ Root Mean Squared Error
-def mean_squared_error(self=None, y_true=None, y_pred=None,squared=False):
-    r"""
+def mean_squared_error(self=None, y_true=None, y_pred=None,squared=True):
+    """
     (Root)Mean Squared Error ((R)MSE) regression loss.
 
     Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-squared-error).
@@ -480,11 +553,13 @@ def mean_squared_error(self=None, y_true=None, y_pred=None,squared=False):
             Ground truth (correct) target values.
     y_pred : array-like of shape (n_samples,)
             Estimated target values.
-    squared : boolean, default = False
-    
-    Return:
+    squared : bool, default = True
+              if True returns MSE value, if False returns RMSE value
+             
+    Returns:
     ------
     loss : float
+            A non-negative floating point value (the best value is 0.0)
     """
     if self is None:
         if (y_true is not None) and (y_pred is not None):
@@ -495,13 +570,13 @@ def mean_squared_error(self=None, y_true=None, y_pred=None,squared=False):
             ytrue = self.model.endog
             ypred = self.predict()
         else:
-            raise ValueError(f"Error : no applicable method for 'mean_squared_error' applied to an object of class {self.model.__class__}.")
+            raise ValueError(f"Error : 'mean_squared_error' only applied to an object of class OLS.")
 
     return metrics.mean_squared_error(y_true=ytrue,y_pred=ypred,squared=squared)
 
 # Max Error
 def max_error(self=None,y_true=None,y_pred=True):
-    r"""
+    """
     Max Error regression loss
 
     The max_error metric calculates the maximum residual error.
@@ -516,7 +591,7 @@ def max_error(self=None,y_true=None,y_pred=True):
     y_pred : array-like of shape (n_samples,)
             Estimated target values.
     
-    Return:
+    Returns:
     ------
     max_error : float
                 A positive floating point value (the best value is 0.0).
@@ -530,13 +605,13 @@ def max_error(self=None,y_true=None,y_pred=True):
             ytrue = self.model.endog
             ypred = self.predict()
         else:
-            raise ValueError(f"Error : no applicable method for 'max_error' applied to an object of class {self.model.__class__}.")
+            raise ValueError("Error : 'max_error' only applied to an object of class OLS.")
     
     return metrics.max_error(y_true=ytrue,y_pred=ypred)
 
 # Mean Absolute Error
 def mean_absolute_error(self=None, y_true=None, y_pred=None, percentage=False):
-    r"""
+    """
     Mean Absolute (Percentage) Error regression loss.
 
     Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-absolute-error).
@@ -548,10 +623,13 @@ def mean_absolute_error(self=None, y_true=None, y_pred=None, percentage=False):
             Ground truth (correct) target values.
     y_pred : array-like of shape (n_samples,) or (n_samples, n_outputs)
             Estimated target values.
+    percentage : bool, default = False;
+                if True returns MAPE, il False returns MAE
     
-    Return:
+    Returns:
     ------
     loss : float
+           MA(P)E output is non-negative floating point. The best value is 0.0.
     """
     if self is None:
         if (y_true is not None) and (y_pred is not None):
@@ -562,7 +640,7 @@ def mean_absolute_error(self=None, y_true=None, y_pred=None, percentage=False):
             ytrue = self.model.endog
             ypred = self.predict()
         else:
-            raise ValueError(f"Error : no applicable method for 'mean_absolute_error' applied to an object of class {self.model.__class__}.")
+            raise ValueError(f"Error : 'mean_absolute_error' only applied to an object of class OLS.")
     
     if percentage:
         return metrics.mean_absolute_percentage_error(y_true=ytrue,y_pred=ypred)
@@ -571,7 +649,7 @@ def mean_absolute_error(self=None, y_true=None, y_pred=None, percentage=False):
     
 # Median Absolute Error
 def median_absolute_error(self=None,y_true=None,y_pred=None):
-    r"""
+    """
     Median Absolute Error regression loss
 
     Median absolute error output is non-negative floating point. The best value is 0.0. Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#median-absolute-error).
@@ -584,7 +662,7 @@ def median_absolute_error(self=None,y_true=None,y_pred=None):
     y_pred : array-like of shape (n_samples,) or (n_samples, n_outputs)
             Estimated target values.
     
-    Return:
+    Returns:
     ------
     loss : float
     """
@@ -605,7 +683,7 @@ def median_absolute_error(self=None,y_true=None,y_pred=None):
 # See : https://datascience.oneoffcoder.com/psuedo-r-squared-logistic-regression.html
 
 def efron_rsquare(ytrue, yprob):
-    r"""
+    """
     Efron's R^2
 
     Parameters
@@ -625,7 +703,7 @@ def efron_rsquare(ytrue, yprob):
     return 1.0 - (t1 / t2)
 
 def r2_efron(self=None,y_true=None, y_prob=None):
-    r"""
+    """
     Efron's R^2
 
     Parameters:
@@ -636,7 +714,7 @@ def r2_efron(self=None,y_true=None, y_prob=None):
     y_prob : array of float. default = None.
             The predicted outcome probability
     
-    Return:
+    Returns:
     -------
     value : float
     """
@@ -646,7 +724,7 @@ def r2_efron(self=None,y_true=None, y_prob=None):
             if n_label == 2:
                 return efron_rsquare(ytrue=y_true,yprob=y_prob)
             else:
-                raise ValueError("Error : 'r2_efron' is only for binary classification.")
+                raise ValueError("Error : 'r2_efron' only applied for binary classification.")
         else:
             raise ValueError("Error : ")
     elif self is not None:
@@ -657,18 +735,26 @@ def r2_efron(self=None,y_true=None, y_prob=None):
             ValueError(f"Error : 'r2_efron' only applied to an object of class Logit.")
 
 # McFadden's Pseudo-R2 : Logit, MNLogit and OrderedModel
+# https://www.statease.com/docs/v12/contents/advanced-topics/glm/pseudo-r-squared/
 def r2_mcfadden(self,adjust=False):
-    r"""
+    """
     McFadden's R^2
 
     Parameters
     ----------
     self : An instance of class Logit, MNLogit and OrderedModel.
     adjust : boolean, default = False
+            if True returns adjusted McFadden r2 score, if False returns McFadden r2 score.
 
     Return:
     -------
     value : float
+
+    References:
+    ----------
+    J. S. Long. Regression Models for categorical and limited dependent variables. Sage Publications, Thousand Oaks, CA, 1997.
+    D. McFadden. Conditional logit analysis of qualitative choice behavior. In P. Zarembka, editor, Frontiers in Econometrics, 
+    chapter Four, pages 104-142. Academic Press, New York, 1974.
     """
     if self.model.__class__ not in [smt.discrete.discrete_model.Logit,
                                     smt.discrete.discrete_model.MNLogit,
@@ -688,7 +774,7 @@ def r2_mcfadden(self,adjust=False):
     
 # MCKelvey & Zavoina R^2
 def r2_mckelvey(self=None,y_prob=None):
-    r"""
+    """
     McKelvey & Zavoina R^2
 
     Parameters:
@@ -700,10 +786,14 @@ def r2_mckelvey(self=None,y_prob=None):
     ------
     value : float
     """
-    if (self is None) and (y_prob is not None):
-        yprob = y_prob
-    elif (self is not None) and (self.model.__class__ == smt.discrete.discrete_model.Logit):
-        yprob = self.predict()
+    if self is None:
+        if y_prob is not None:
+            yprob = y_prob
+    else:
+        if self.model.__class__ == smt.discrete.discrete_model.Logit:
+            yprob = self.predict()
+        else:
+            raise ValueError(f"Error : 'r2_mckelvey' only applied to an object of class Logit.")
     return np.var(yprob) / (np.var(yprob) + (np.power(np.pi, 2.0) / 3.0) )
 
 # Get number of correct outcome
@@ -713,7 +803,7 @@ def get_num_correct(ytrue, yprob, threshold=0.5):
 
 # Count R^2
 def r2_count(self=None,y_true=None,y_prob=None,threshold=0.5):
-    r"""
+    """
     Count R^2
 
     Parameters
@@ -737,7 +827,7 @@ def r2_count(self=None,y_true=None,y_prob=None,threshold=0.5):
                 num_correct = get_num_correct(ytrue=y_true,yprob=y_prob, threshold=threshold)
                 return num_correct / n
             else:
-                raise ValueError("Error : 'r2_count' is only for binary classification.")
+                raise ValueError("Error : 'r2_count' only applied for binary classification.")
     elif self is not None:
         if self.model.__class__ == smt.discrete.discrete_model.Logit:
             y_true, y_prob = self.model.endog, self.predict()
@@ -760,7 +850,7 @@ def get_count_most_freq_outcome(ytrue):
 
 # Adjust count R^2
 def r2_count_adj(self=None,y_true=None,y_prob=None,threshold=0.5):
-    r"""
+    """
     Adjusted R^2 count
 
     Parameters
@@ -786,7 +876,7 @@ def r2_count_adj(self=None,y_true=None,y_prob=None,threshold=0.5):
                 n = get_count_most_freq_outcome(ytrue=y_true)
                 return (correct - n) / (total - n)
             else:
-                raise ValueError("Error : 'r2_count_adj' is only for binary classification.")
+                raise ValueError("Error : 'r2_count_adj' only applied for binary classification.")
     elif self is not None:
         if self.model.__class__ == smt.discrete.discrete_model.Logit:
             y_true, y_prob = self.model.endog, self.predict()
@@ -799,7 +889,7 @@ def r2_count_adj(self=None,y_true=None,y_prob=None,threshold=0.5):
 
 # Cox and Snell R^2
 def r2_coxsnell(self):
-    r"""
+    """
     Cox and Snell R^2
 
     Parameters
@@ -822,7 +912,7 @@ def r2_coxsnell(self):
 
 # Nagelkerke/Cragg & Uhler's R^2
 def r2_nagelkerke(self):
-    r"""
+    """
     Nagelkerke/Cragg & Uhler's R^2
 
     Parameters
@@ -843,13 +933,25 @@ def r2_nagelkerke(self):
     max_r2coxsnell = 1 - L0**(2/n)
     return r2_coxsnell(self)/max_r2coxsnell
 
+# https://www.statease.com/docs/v12/contents/advanced-topics/glm/tjur-pseudo-r-squared/
 def r2_tjur(self):
-    r"""
+    """
     Tjur R-squared
 
     Applied only to logistic regression.
-    
-    
+
+    Parameters:
+    ----------
+    self : an instance of class Logit
+
+    Returns:
+    -------
+    value :float
+
+    References:
+    -----------
+    Tue Tjur. Coefficients of determination in logistic regression models-a new proposal: the coefficient of 
+    discrimination. The American Statistician, 63(4):366-372, November 2009.
     """
     if self.model.__class__ != smt.discrete.discrete_model.Logit:
         raise ValueError("Error : 'r2_tjur' only applied to an object of class Logit.")
@@ -860,31 +962,71 @@ def r2_tjur(self):
     return float(gmean[1]) - float(gmean[0])
 
 def r2_kullback(self,adjust=True):
-    pass
+    """
+
+    Calculates the Kullback-Leibler-divergence-based R2 for generalized linear models.
+
+    Parameters:
+    -----------
+    self : A generalized linear model (Logit, MNLogit, OrderedModel, Poisson)
+    adjust : bool, default = True
+            if True returns the adjusted R2 value
+    
+    Returns:
+    --------
+    value : float
+
+    References:
+    -----------
+    Cameron, A. C. and Windmeijer, A. G. (1997) An R-squared measure of goodness of fit for some common nonlinear regression models. Journal of Econometrics, 77: 329-342.
+    """
+
+    if self.model.__class__ == smt.regression.linear_model.OLS:
+        raise ValueError("Error : 'r2_kullback' only applied to a generalized linear model")
+
+    if adjust:
+        adj = (self.df_model+self.df_resid)/self.df_resid
+    else:
+        adj = 1
+    
+    # Model deviance
+    model_deviance = -2*self.llf
+    # Null deviance
+    null_deviance = -2*self.llnull
+    klr2 = 1 -  (model_deviance/null_deviance)*adj
+    return klr2
 
 def r2_loo(self):
-    pass 
+    raise NotImplementedError("Error : 'r2_loo' is not yet implemented.")
 
 def r2_loo_posterior(self):
-    pass
+    raise NotImplementedError("Error : 'r2_loo_posterior' is not yet implemented.")
 
 def r2_nakagawa(self):
-    pass
+    raise NotImplementedError("Error : 'r2_nakagawa' is not yet implemented.")
 
 def r2_posterior(self):
-    pass
+    raise NotImplementedError("Error : 'r2_posterior' is not yet implemented.")
 
-def r2_somers(self):
+def r2_somers(self,threshold=0.5):
     """
     Somers' Dxy rank correlation for binary outcomes
 
+    Parameters
+    ----------
+    self : an instance of class Logit.
+    threshold : classification threshold, default = 0.5.
+
+    Returns:
+    -------
+    Dxy : namedtuple
     """
 
     if self.model.__class__ != smt.discrete.discrete_model.Logit:
         raise ValueError("Error : 'r2_somers' only applied to an object of class Logit.")
     
     y_true = self.model.endog
-    y_pred = np.where(self.predict() < 0.5,0.0,1.0)
+    y_pred = np.where(self.predict() < threshold,0.0,1.0)
     return st.somersd(x=y_true,y=y_pred,alternative="two-sided")
 
 def r2_xu(self):
@@ -895,8 +1037,8 @@ def r2_xu(self):
     ----------
     self : an instance of class OLS
 
-    Return
-    ------
+    Returns:
+    --------
     score : float
 
     References:
@@ -910,14 +1052,14 @@ def r2_xu(self):
     return 1 - np.var(self.resid,ddof=0)/np.var(self.model.endog,ddof=0)
 
 def r2_zeroinflated(self):
-    pass
+    raise NotImplementedError("Error : 'r2_zeroinflated' is not yet implemented.")
 
 def r2_bayes(self):
-    pass
+    raise NotImplementedError("Error : 'r2_bayes' is not yet implemented.")
 
 #
 def r2(self):
-    r"""
+    """
     Compute the model's R^2
 
     Calculate the R2, also known as the coefficient of determination, 
@@ -928,8 +1070,7 @@ def r2(self):
     ----------
     self : an instance of class Ols, Logit, MNLogit or OrderedModel
 
-
-    Return:
+    Returns:
     ------
     score :float
     """
@@ -964,7 +1105,7 @@ def accuracy_score(self=None,y_true=None,y_pred=None,threshold=0.5):
     threshold : float,  default = 0.5.
             The threshold value is used to make a binary classification decision based on the probability of the positive class.
            
-    Return:
+    Returns:
     ------
     score : float
     """
@@ -974,7 +1115,7 @@ def accuracy_score(self=None,y_true=None,y_pred=None,threshold=0.5):
             ypred = y_pred
     elif self is not None:
         if self.model.__class__ == smt.regression.linear_model.OLS:
-            raise ValueError("Error : no applicable method for 'accuracy_score' applied to an object of class OLS.")
+            raise ValueError("Error : 'accuracy_score' only applied to generalized linear models.")
         ytrue = self.model.endog
         if self.model.__class__ == smt.discrete.discrete_model.Logit:
             ypred = np.where(self.predict() < threshold,0,1)
@@ -998,7 +1139,7 @@ def error_rate(self=None,y_true=None,y_pred=None,threshold=0.5):
     threshold : float,  default = 0.5.
             The threshold value is used to make a binary classification decision based on the probability of the positive class.
            
-    Return:
+    Returns:
     ------
     error_rate : float
     """
@@ -1019,8 +1160,8 @@ def balanced_accuracy_score(self=None,y_true=None,y_pred=None, threshold=0.5):
     threshold : float,  default = 0.5.
             The threshold value is used to make a binary classification decision based on the probability of the positive class.
            
-    Return:
-    ------
+    Returns:
+    --------
     balanced_accuracy : float
                         Balanced accuracy score.
     """
@@ -1052,7 +1193,7 @@ def average_precision_score(self=None,y_true=None, y_prob = None):
     y_prob : array-like of shape (n_samples,) , default =None.
             Probabilities of the positive class..
 
-    Return:
+    Returns:
     -------
     average_precision : float.
                         Average precision score.
@@ -1085,7 +1226,7 @@ def brier_score_loss(self=None,y_true=None,y_prob=None):
     y_prob : array-like of shape (n_samples,) , default =None.
             Probabilities of the positive class.
 
-    Return:
+    Returns:
     -------
     score : float.
             Brier score loss.
@@ -1375,8 +1516,8 @@ def check_autocorrelation(self,test="dw",nlags=None,maxiter=100):
         
     return res
 
-def check_clusterstructure(self):
-    pass 
+def check_clusterstructure(X):
+    raise NotImplementedError("Error : 'check_clusterstructure' is not yet implemented.")
 
 def check_collinearity(self, metrics = "klein"):
 
@@ -1385,13 +1526,13 @@ def check_collinearity(self, metrics = "klein"):
     metrics : {"klein","farrar-glauber","vif"}
     
     """
-    pass
+    raise NotImplementedError("Error : 'check_collinearity' is not yet implemented.")
 
-def check_concurvity(self):
-    pass 
-
+def check_concurvity(X):
+    raise NotImplementedError("Error : 'check_concurvity' is not yet implemented.")
+    
 def check_convergence(self):
-    pass
+    raise NotImplementedError("Error : 'check_convergence' is not yet implemented.")
 
 def check_distribution(self, choice = "response"):
     """
@@ -1399,13 +1540,18 @@ def check_distribution(self, choice = "response"):
     Distribution of model family
     
     """
-    pass
+    raise NotImplementedError("Error : 'check_distribution' is not yet implemented.")
 
 def check_factorstructure(self):
-    pass
+    """
+    """
+    raise NotImplementedError("Error : 'check_factorstructure' is not yet implemented.")
 
 def check_heterogeneity_bias(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'check_heterogeneity_bias' is not yet implemented.")
 
 def check_heteroscedasticity(self, test = "bp",alpha=0.05,drop=None):
     """
@@ -1464,39 +1610,20 @@ def check_heteroscedasticity(self, test = "bp",alpha=0.05,drop=None):
     return res
 
 def check_homogeneity(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'check_homogeneity' is not yet implemented.")
 
 def check_itemscale(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'check_itemscale' is not yet implemented.")
 
-
-# Indice KMO Global
-def global_kmo_index(x):
-  # Matrice des corrélations
-  corr = x.corr(method="pearson").values
-  # Matrice des corrélations partielles
-  pcorr = x.pcorr().values
-  # Indice KMO global
-  np.fill_diagonal(corr,0)
-  np.fill_diagonal(pcorr,0)
-  return np.sum(corr**2)/(np.sum(corr**2)+np.sum(pcorr**2))
-
-# Indice KMO par variable
-def per_item_kmo_index(x):
-  # Matrice des corrélations linéaires
-  corr = x.corr(method = "pearson").values
-  # Matrice des corrélations partielles
-  pcorr = x.pcorr().values
-  # Indice KMO global
-  np.fill_diagonal(corr,0)
-  np.fill_diagonal(pcorr,0)
-  A = np.sum(corr**2, axis=0)
-  B = np.sum(pcorr**2, axis=0)
-  kmo_per_item = A /(A+B)
-  return pd.DataFrame(kmo_per_item,index=x.columns,columns = ["KMO"])
-
+# https://github.com/Sarmentor/KMO-Bartlett-Tests-Python/blob/master/correlation.py
 # Computes KMO
-def check_kmo(X=pd.DataFrame):
+def check_kmo(X):
     """
     Computes Kaiser, Meyer, Olkin (KMO) measure
 
@@ -1510,25 +1637,58 @@ def check_kmo(X=pd.DataFrame):
     """
 
     if not isinstance(X,pd.DataFrame):
-        raise ValueError("Error : 'X' must be a DataFrame.")
-    return {"overall KMO" : global_kmo_index(X),"ind. KMO score" : per_item_kmo_index(X)}
+            raise TypeError(
+            f"{type(X)} is not supported. Please convert to a DataFrame with "
+            "pd.DataFrame. For more information see: "
+            "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html")
+    
+    # Correlation matrix
+    corr = X.corr(method="pearson")
+    # Inverse of the correlation matrix
+    inv_corr = np.linalg.inv(corr)
+    # Dimesion
+    n_row, n_col = corr.shape
 
-def check_model(self, figsize=None,n_simulate=100):
+    # Partial correlation matrix
+    A = np.ones((n_row,n_col))
+    for i in np.arange(1,n_row,1):
+        for j in np.arange(i,n_col,1):
+            # Above the diagonal
+            A[i,j] = - (inv_corr[i,j])/math.sqrt(inv_corr[i,i]*inv_corr[j,j])
+            # Below the diagonal
+            A[j,i] = A[i,j]
+    
+    # Transform to an aray of array ('matrix' with python)
+    corr = np.asarray(corr)
+
+    # KMO value
+    kmo_num = np.sum(np.square(corr)) - np.sum(np.square(np.diagonal(corr)))
+    kmo_denom = kmo_num + np.sum(np.square(A)) - np.sum(np.square(np.diagonal(A)))
+    kmo_value = kmo_num / kmo_denom
+
+    kmo_j = [None]*corr.shape[1]
+    #KMO per variable (diagonal of the spss anti-image matrix)
+    for j in range(0, corr.shape[1]):
+        kmo_j_num = np.sum(corr[:,[j]] ** 2) - corr[j,j] ** 2
+        kmo_j_denom = kmo_j_num + np.sum(A[:,[j]] ** 2) - A[j,j] ** 2
+        kmo_j[j] = kmo_j_num / kmo_j_denom
+    
+    Result = collections.namedtuple("KMOTestResults", ["value", "per_variable"])   
+    return Result(value=kmo_value,per_variable=kmo_j)
+
+def check_model(self, figsize=None):
     """
     
     
     """
-
-    
-    
 
     if figsize is None:
         figsize=(12,10)
     
+    fig, axs = plt.subplots(3,2,figsize=figsize)
+    
     if self.model.__class__ == smt.regression.linear_model.OLS:
         dataset = pd.DataFrame(np.c_[self.model.endog,self.predict()],columns=[self.model.endog_names,"predicted"])
-    
-        fig, axs = plt.subplots(3,2,figsize=figsize)
         # Add Density
         dataset.plot(kind="density",ax=axs[0,0])
         axs[0, 0].set(xlabel=self.model.endog_names,ylabel="Density",title="Posterior Predictive Check")
@@ -1554,25 +1714,79 @@ def check_model(self, figsize=None,n_simulate=100):
         # Normality of Residuals
         sm.qqplot(infl.resid_studentized_external,line="45",ax=axs[2,1])
         axs[2,1].set(title="Normality of Residuals")
-    elif self.model.__class__ == smt.discrete.discrete_model.Logit:
-        dataset = pd.DataFrame()
-    elif self.model.__class__ == smt.discrete.discrete_model.MNLogit:
-        raise ValueError("Error: `check_model()` not implemented for models of class `MNLogit` yet.")
+    else:
+        raise ValueError("Error: `check_model()` not yet implemented.")
     
     plt.tight_layout()
     plt.show()
 
 def check_multimodal(self):
-    pass
+    """
+    Check if a distribution is unimodal or multimodal
+    
+    """
+    # Guassian Mixture
+    raise NotImplementedError("Error : 'check_multimodal' is not yet implemented.")
 
-def check_normality(self):
-    pass
+def check_normality(self, test="shapiro", effects = "fixed"):
+    """
+    Check model for (non-)normality of residuals.
 
-def check_outliers(self):
-    pass
+    Parameters:
+    ----------
+    self : an instance of class OLS
+    test : {'shapiro','jarque-bera','agostino'}, default = 'shapiro'
+            i
+            - 'shapiro' : Perform the Shapiro-Wilk test for normality.
+            - 'jarque-bera' : Perform the Jarque-Bera goodness of fit test on sample data.
+            - 'agostino' : It is based on D'Agostino and Pearson's, test that combines skew and kurtosis to produce an omnibus test of normality.
+    effects : {'fixed','random'}
+            Should normality for residuals ("fixed") or random effects ("random") be tested? Only applies to mixed-effects models. May be abbreviated.
+
+    Returns:
+    -------
+    results : nametuple
+                statistic : flaot
+                    The test statistic
+                pvalue : float
+                    The p - value for the hypothseis test
+
+    Notes:
+    ------
+    check_normality()  checks the standardized residuals (or studentized residuals for mixed models) for normal distribution. 
+
+    References:
+    ----------
+    D'Agostino, R. B. (1971), “An omnibus test of normality for moderate and large sample size”, Biometrika, 58, 341-348
+    D'Agostino, R. and Pearson, E. S. (1973), “Tests for departure from normality”, Biometrika, 60, 613-622
+    Shapiro, S. S., & Wilk, M. B. (1965). An analysis of variance test for normality (complete samples). Biometrika, 52(3/4), 591-611.
+    Jarque, C. and Bera, A. (1980) “Efficient tests for normality, homoscedasticity and serial independence of regression residuals”, 6 Econometric Letters 255-259.
+    """
+
+    if self.model.__class__ != smt.regression.linear_model.OLS:
+        raise ValueError("Error : Checking normality of residuals is only appropriate for linear models.")
+    
+    if self.model.__class__ == smt.regression.linear_model.OLS:
+        resid = rstandard(self,choice="sd_1")
+    
+    if test == 'shapiro':
+        stat = st.shapiro(resid)
+    elif test == 'jardque-bera':
+        stat = st.jarque_bera(resid)
+    elif test == 'agostino':
+        stat = st.normaltest(resid)
+    Result = collections.namedtuple("NormalityTest",["statistic","pvalue"],rename=False)
+    return Result(statistic=stat.statistic,pvalue=stat.pvalue)
+
+def check_outliers(self, method=None):
+    """
+    Outliers detection (check for influential observations)
+    
+    """
+    raise NotImplementedError("Error : 'check_outliers' is not yet implemented.")
 
 def check_overdispersion(self):
-    r"""
+    """
     Overdispersion test
 
     Parameters
@@ -1632,25 +1846,40 @@ def check_overdispersion(self):
     return result
 
 def check_posterior_predictions(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'check_posterior_predictions' is not yet implemented.")
 
 def check_predictions(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'check_predictions' is not yet implemented.")
 
 def check_singularity(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'check_singularity' is not yet implemented.")
 
 def check_sphericity(self):
-    pass
+    """
+    Check model for violation of sphericity
+    
+    
+    """
+    raise NotImplementedError("Error : 'check_sphericity' is not yet implemented.")
 
 def check_sphericity_bartlett(X,method="pearson"):
-    r"""
+    """
     Test of Sphericity
 
     Parameters
     ----------
     X : DataFrame
-    method : {'pearson','spearman'}
+    method : {'pearson','spearman'}, default = 'pearson'
+            if 'pearson' used Pearson correlation matrix, if 'spearman' used Spearman rank correlation matrix
 
     Returns:
     --------
@@ -1698,15 +1927,56 @@ def check_sphericity_bartlett(X,method="pearson"):
         
     return result
 
+def check_symmetric(x):
+    """
+    Check distribution symmetry
 
-def check_symmetric(self):
-    pass
+    Parameters
+    ----------
+    x : 1D-array or pd.Series
+
+    Returns:
+    -------
+    out: nametuple:
+        The function outputs the Hotelling and Solomons test, the test value (statistic) and the p-value.
+
+    Notes :
+    ------
+    Uses Hotelling and Solomons test of symmetry by testing if the standardized
+    nonparametric skew (\eqn{\frac{(Mean - Median)}{SD}}) is different than 0.
+    """
+
+    if isinstance(x,pd.Series):
+        x = x.dropna()
+    elif isinstance(x,np.array):
+        x = x[np.isfinite(x)]
+    
+    m = np.mean(x)
+    a = np.median(x)
+    n = len(x)
+    s = np.std(x,ddof=1)
+    D = n*(m-a)/s
+    z = np.sqrt(2*n)*(m-a)/s
+    pvalue = st.norm.sf(abs(z))
+    # Store all informations in a namedtuple
+    Result = collections.namedtuple("SymmetryTestResult", ["statistic","pvalue"], rename=False)   
+    result = Result(statistic=z,pvalue=pvalue) 
+    # Warning message
+    if pvalue < 0.05:
+        warnings.warn("Warning :  Non - symmetry detected (p = %.3f)"%(pvalue))
+    return result
 
 def check_zeroinflation(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'check_zeroinflation' is not yet implemented.")
 
 def posterior_predictive_check(self):
-    pass
+    """
+    
+    """
+    raise NotImplementedError("Error : 'posterior_predictive_check' is not yet implemented.")
 
 def model_performance(self, metrics = "common"):
     """
@@ -1734,7 +2004,7 @@ def model_performance(self, metrics = "common"):
             res["mean abs. error"] = mean_absolute_error(self)
             res["median abs. error"] = median_absolute_error(self)
             res["mean sq. error"] = mean_squared_error(self)
-            res["root mean sq. error"] = mean_squared_error(self,squared=True)
+            res["root mean sq. error"] = mean_squared_error(self,squared=False)
             res["mean abs. percentage error"] = mean_absolute_error(self,percentage=True)
         elif self.model.__class__ in [smt.discrete.discrete_model.Logit,
                                       smt.discrete.discrete_model.MNLogit,
@@ -1744,6 +2014,8 @@ def model_performance(self, metrics = "common"):
             res["r2 mcfadden adj."] = r2_mcfadden(self,adjust=True)
             res["r2 coxsnell"] = r2_coxsnell(self)
             res["r2 naglekerke"] = r2_nagelkerke(self)
+        elif self.model.__class__ == smt.discrete.discrete_model.Poisson:
+            res["pseudo r2"] = 1 - (-2*self.llf)/(-2*self.llnull)
         
         if self.model.__class__ == smt.discrete.discrete_model.Logit:
             res["r2 efron"] = r2_efron(self)
@@ -1751,6 +2023,7 @@ def model_performance(self, metrics = "common"):
             res["r2 count"] = r2_count(self)
             res["r2 count adj."] = r2_count_adj(self)
             res["r2 tjur"] = r2_tjur(self)
+        
 
     return res
 
@@ -1796,12 +2069,45 @@ def compare_performance(model=list()):
     res1 = pd.concat(map(lambda x : evaluate(x[0],x[1]),enumerate(model)),axis=0)
     return res1
         
+# https://github.com/cran/ggROC/blob/master/R/GGROC.R
+# https://github.com/xrobin/pROC/blob/master/R/ggroc.R
+def ggroc(self=None,
+          y_true=None, 
+          y_score = None,
+          pos_label=None,
+          color="steelblue",
+          linetype="solid",
+          size=0.5,
+          alpha=1,
+          title= "ROC Curve",
+          ggtheme = pn.theme_minimal()):
+
+    if self is None:
+        if (y_true is not None) and (y_score is not None):
+            n_label = len(np.unique(y_true))
+            if n_label == 2:
+                ytrue = y_true
+                yscore = y_score
+            else:
+                raise ValueError("Error : 'ggroc' only applied for binary classification.")
+    elif self is not None:
+        if self.model.__class__ == smt.discrete.discrete_model.Logit:
+            ytrue = self.model.endog 
+            yscore = self.predict()
+        else:
+            raise ValueError("Error : 'ggroc' only applied to an object of class Logit (binary classification).")
+    
+    fpr, tpr, _ = metrics.roc_curve(ytrue,yscore,pos_label=pos_label)
+    data = pd.DataFrame({"FPR":fpr,"TPR" : tpr})
+
+    p = (pn.ggplot(data,pn.aes(x="FPR",y="TPR"))+
+         pn.geom_line(color=color,linetype=linetype,size=size,alpha=alpha)+
+         pn.geom_abline(intercept=0,slope = 1,linetype="dashed")+
+         pn.labs(x="specificity",y="sensitivity",title=title))
+
+    # Add theme
+    p = p + ggtheme
+    return p
 
 
-def ggroc(self=None, y_true=None,y_prob=None):
-    pass
-
-def ggmroc(self,y_true=None):
-    pass
-
-
+# https://www.metalesaek.com/post/count_data/count-data-models/
