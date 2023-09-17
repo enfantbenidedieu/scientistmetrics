@@ -9,10 +9,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="scientistmetrics", 
-    version="0.0.2",
+    version="0.0.3",
     author="Duverier DJIFACK ZEBAZE",
     author_email="duverierdjifack@gmail.com",
-    description="Python package for calculating correlation amongst categorical variables",
+    description="Python package for metrics and scoring : quantifying the quality of predictions",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/enfantbenidedieu/scientistmetrics",
