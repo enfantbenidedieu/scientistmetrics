@@ -1,9 +1,9 @@
 
 # -*- coding: utf-8 -*-
+
 import math
 import numpy as np
 import pandas as pd
-import pingouin as pg
 import scipy.stats as st
 import matplotlib.pyplot as plt
 import warnings as warnings
@@ -2065,6 +2065,12 @@ def compare_performance(model=list()):
             res["RMSE"] = np.sqrt(name.mse)
             res["SSE"] = name.sse
             res.insert(0,"Name","arima")
+        elif name.model.__class__ == smt.discrete.discrete_model.Poisson:
+            res.insert(0,"Name","poisson")
+        elif name.model.__class__ == smt.discrete.discrete_model.MNLogit:
+            res.insert(0,"Name","multinomial")
+        elif name.model.__class__ == smt.miscmodels.ordinal_model.OrderedModel:
+            res.insert(0,"Name","ordinal")
         return res
     res1 = pd.concat(map(lambda x : evaluate(x[0],x[1]),enumerate(model)),axis=0)
     return res1
