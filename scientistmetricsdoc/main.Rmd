@@ -1,6 +1,6 @@
 ---
-title: "**scientistmetrics**"
-subtitle: "version $0.0.2$"
+title: "**Logistic Regression Goodness-Of-Fit using Statsmodels and Scientistmetrics**"
+subtitle: "version $0.0.3$"
 author: "Duvérier DJIFACK ZEBAZE"
 #date: "`r format(Sys.Date(), '%d %B %Y')`"
 geometry: "left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm, twoside=true"
@@ -186,7 +186,7 @@ plt.style.use('ggplot')  # ggplot style
 ```{python child = "chapter1.Rmd",eval=FALSE,echo=FALSE}
 ```
 
-```{python child = "chapter2.Rmd"}
+```{python child = "chapter4.Rmd"}
 ```
 
 

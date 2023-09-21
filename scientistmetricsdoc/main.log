@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.8.12)  25 AUG 2023 00:26
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.9.19)  21 SEP 2023 10:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-08-11>
+L3 programming layer <2023-08-29>
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2023/05/17 v1.4n Standard LaTeX document class
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size11.clo
@@ -132,7 +132,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 ) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-08-11 L3 programming layer (loader) 
+Package: expl3 2023-08-29 L3 programming layer (loader) 
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2023-04-19 L3 backend support: XeTeX
 \g__graphics_track_int=\count268
@@ -145,9 +145,9 @@ Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
 Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2023-02-02 L3 Experimental document command parser
+Package: xparse 2023-08-29 L3 Experimental document command parser
 ) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
+Package: l3keys2e 2023-08-29 LaTeX2e option processing using LaTeX3 keys
 ) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
@@ -387,7 +387,7 @@ Package: inputenc 2021/02/14 v1.3d Input encoding file
 Package inputenc Warning: inputenc package ignored with utf8 based engines.
 
 ) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2023/07/15 v3.92 The Babel package
+Package: babel 2023/09/12 v3.94 The Babel package
 \babel@savecnt=\count298
 \U@D=\dimen177
 \l@unhyphenated=\language4
@@ -527,7 +527,7 @@ Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
 ) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lettrine/lettrine.sty
 File: lettrine.sty 2023-08-14 v2.52 (Daniel Flipo)
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xfp/xfp.sty
-Package: xfp 2023-02-02 L3 Floating point unit
+Package: xfp 2023-08-29 L3 Floating point unit
 )
 \c@DefaultLines=\count311
 \c@DefaultDepth=\count312
@@ -771,7 +771,7 @@ Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 )) (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/marginnote/marginnote.sty
-Package: marginnote 2018/08/09 v1.4b non floating margin notes for LaTeX
+Package: marginnote 2018/08/09 1.4b non floating margin notes for LaTeX
 \c@mn@abspage=\count337
 )
 \c@exercises@totalpoints=\count338
@@ -1074,34 +1074,34 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 166.
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 179.
-LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 180.
+LaTeX Font Info:    ... okay on input line 180.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 179.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 180.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 179.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 180.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 179.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 180.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 179.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 180.
 
 Package fontspec Info: latinmodern-math scale = 1.093247546840395.
 
@@ -1127,7 +1127,7 @@ Package fontspec Info: Font family 'latinmodern-math.otf(0)' created for font
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 11.97104pt on input line 179.
+(Font)              scaled to size 11.97104pt on input line 180.
 
 Package fontspec Info: latinmodern-math scale = 1.093247546840395.
 
@@ -1159,15 +1159,15 @@ Package fontspec Info: Font family 'latinmodern-math.otf(1)' created for font
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 11.97104pt on input line 179.
+(Font)              scaled to size 11.97104pt on input line 180.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 179.
+(Font)              `operators' in the math version `normal' on input line 180.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 179.
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 180.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 179.
+(Font)              `operators' in the math version `bold' on input line 180.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 179.
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 180.
 
 Package fontspec Info: latinmodern-math scale = 1.093247546840395.
 
@@ -1246,13 +1246,13 @@ Package fontspec Info: Font family 'latinmodern-math.otf(2)' created for font
 (fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 179.
+(Font)              `symbols' in the math version `normal' on input line 180.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
-(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 179.
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 180.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 179.
+(Font)              `symbols' in the math version `bold' on input line 180.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
-(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 179.
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 180.
 
 Package fontspec Info: latinmodern-math scale = 1.093247546840395.
 
@@ -1313,13 +1313,13 @@ Package fontspec Info: Font family 'latinmodern-math.otf(3)' created for font
 (fontspec)             =7.18262pt\relax \fontdimen 13\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `normal' on input line 179.
+(Font)              `largesymbols' in the math version `normal' on input line 180.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 179.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 180.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 179.
+(Font)              `largesymbols' in the math version `bold' on input line 180.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
-(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 179.
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 180.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1365,7 +1365,7 @@ Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \up on input line 179.
+LaTeX Info: Redefining \up on input line 180.
 Package minitoc(hints) Info: I0049
 (minitoc(hints))             ==> You requested the hints option. 
 (minitoc(hints))             Some hints are eventually given below.
@@ -1389,44 +1389,44 @@ Package minitoc(hints) Warning: W0023
 (minitoc(hints))                --- It may be the consequence 
 (minitoc(hints))                of loading the ``hyperref'' package.
 
-Package hyperref Info: Link coloring ON on input line 179.
+Package hyperref Info: Link coloring ON on input line 180.
 (./main.out) (./main.out)
 \@outlinefile=\write6
 \openout6 = `main.out'.
 
 LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 181.
+(Font)              scaled to size 17.28pt on input line 182.
 LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 181.
+(Font)              scaled to size 17.28pt on input line 182.
 LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 181.
+(Font)              scaled to size 12.0pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 13.11896pt on input line 181.
+(Font)              scaled to size 13.11896pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.74597pt on input line 181.
+(Font)              scaled to size 8.74597pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.55948pt on input line 181.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 181.
+(Font)              scaled to size 6.55948pt on input line 182.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 182.
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 13.12024pt on input line 181.
+(Font)              scaled to size 13.12024pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.74683pt on input line 181.
+(Font)              scaled to size 8.74683pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.56012pt on input line 181.
+(Font)              scaled to size 6.56012pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 13.11768pt on input line 181.
+(Font)              scaled to size 13.11768pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 8.74512pt on input line 181.
+(Font)              scaled to size 8.74512pt on input line 182.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.55884pt on input line 181.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 181.
+(Font)              scaled to size 6.55884pt on input line 182.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 182.
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 181.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 182.
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -1442,21 +1442,21 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \c@hypothese=\count386
 Package minitoc Info: I0013
 (minitoc)             \mtcsetdepth redefines the counter 
-(minitoc)             "minitocdepth" as "1" on input line 204.
+(minitoc)             "minitocdepth" as "1" on input line 205.
 Package minitoc Info: I0017
 (minitoc)             \mtcsettitle redefines the macro 
 (minitoc)             "mtctitle" as 
-(minitoc)             "Sommaire" on input line 205.
+(minitoc)             "Sommaire" on input line 206.
 Package minitoc Info: I0024
-(minitoc)             PREPARING MINITOCS FROM main.toc on input line 212.
+(minitoc)             PREPARING MINITOCS FROM main.toc on input line 213.
 Package minitoc Info: I0033
 (minitoc)             Writing main.mtc1.
 \openout4 = `main.mtc1'.
 
 LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 216.
+(Font)              scaled to size 14.4pt on input line 217.
 
-Overfull \hbox (16.78712pt too wide) in paragraph at lines 216--216
+Overfull \hbox (16.78712pt too wide) in paragraph at lines 217--217
 [][][][][][][]  
  []
 
@@ -1495,33 +1495,56 @@ Package marginnote Warning: Consecutive odd pages found.
 (marginnote)                Maybe you've forgotten a \cleardoublepage before
 (marginnote)                changing the page numbering on page i.
 
-Package marginnote Info: Using workaround for absolute page number on input line 218.
+Package marginnote Info: Using workaround for absolute page number on input line 219.
 Chapitre 1.
-LaTeX Font Info:    Trying to load font information for OT1+pzc on input line 229.
+LaTeX Font Info:    Trying to load font information for OT1+pzc on input line 230.
 (c:/Users/duver/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1pzc.fd
 File: ot1pzc.fd 2020/03/25 font definitions for OT1/pzc.
 )
 LaTeX Font Info:    Font shape `OT1/pzc/m/n' in size <76> not available
-(Font)              Font shape `OT1/pzc/m/it' tried instead on input line 229.
+(Font)              Font shape `OT1/pzc/m/it' tried instead on input line 230.
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 229--229
+Overfull \hbox (10.0pt too wide) in paragraph at lines 230--230
 [][][][][][][][][]  
  []
 
-LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 229.
 
-Overfull \hbox (16.78712pt too wide) in paragraph at lines 229--229
+Overfull \hbox (16.78712pt too wide) in paragraph at lines 230--230
 [][][][][][][]  
  []
 
+\openout4 = `main.mtc'.
+
+\openout4 = `main.mtc'.
+
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.93246pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.65273pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.46623pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.93353pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.65347pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.46677pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 10.9314pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.65198pt on input line 231.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.4657pt on input line 231.
 LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 240.
-
-Package hyperref Warning: Suppressing link with empty target on input line 245.
-
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 255.
+(Font)              scaled to size 12.0pt on input line 231.
+(./main.mtc1
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 1.
+)
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 236.
 [1
 
 ]
@@ -1534,7 +1557,9 @@ Package marginnote Warning: Consecutive odd pages found.
 (marginnote)                Maybe you've forgotten a \cleardoublepage before
 (marginnote)                changing the page numbering on page 1.
 
-Package marginnote Info: Using workaround for absolute page number on input line 282.
+Package marginnote Info: Using workaround for absolute page number on input line 269.
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 325.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -1543,15 +1568,156 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [2]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 354.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 354.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 354.
+
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 368.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 368.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(1)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 392.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(1)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 392.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(1)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 392.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[3]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[4]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[5]
+File: ./images/cm-matrix.png Graphic file (type bmp)
+<./images/cm-matrix.png>
+
+LaTeX Font Warning: Font shape `TU/BookmanOldStyle(0)/m/sc' undefined
+(Font)              using `TU/BookmanOldStyle(0)/m/n' instead on input line 582.
+
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 582.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/b/n' will be
+(Font)              scaled to size 8.0pt on input line 582.
+
+LaTeX Font Warning: Font shape `TU/BookmanOldStyle(0)/b/sc' undefined
+(Font)              using `TU/BookmanOldStyle(0)/b/n' instead on input line 582.
+
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/sc' will be
+(Font)              scaled to size 10.95pt on input line 582.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/b/sc' will be
+(Font)              scaled to size 8.0pt on input line 582.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[6]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[7]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9]
+File: main_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (type pdf)
+<use main_files/figure-latex/unnamed-chunk-26-1.pdf>
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(0)/m/it' will be
+(Font)              scaled to size 10.95pt on input line 847.
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[10]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[11]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[12]
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(1)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 996.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(1)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 996.
+LaTeX Font Info:    Font shape `TU/BookmanOldStyle(1)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 996.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 996.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 996.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[13]
 Package minitoc Info: I0009
 (minitoc)             Listing minitoc auxiliary files. 
 (minitoc)             Creating the main.maf file.
 \openout4 = `main.maf'.
-
-
-Package minitoc(hints) Warning: W0078
-(minitoc(hints))                You have used \dominitoc, 
-(minitoc(hints))                but not \minitoc.
 
 
 Package minitoc(hints) Warning: W0086
@@ -1575,21 +1741,24 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[3] (./main.aux)
+[14] (./main.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-08-11>
+L3 programming layer <2023-08-29>
  ***********
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B9B0295EE9EE3EABB95F564D2BEEB0FF;500.
+(rerunfilecheck)             Checksum: 9CEC90D13278DFA3B806B0688D603357;1441.
  ) 
 Here is how much of TeX's memory you used:
- 35993 strings out of 477825
- 692032 string characters out of 5820236
- 1936879 words of memory out of 5000000
- 56319 multiletter control sequences out of 15000+600000
- 565252 words of font info for 105 fonts, out of 8000000 for 9000
+ 36102 strings out of 477570
+ 695499 string characters out of 5816215
+ 1931416 words of memory out of 5000000
+ 56653 multiletter control sequences out of 15000+600000
+ 568258 words of font info for 136 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,11n,132p,414b,539s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,12n,132p,414b,516s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (5 pages).
+Output written on main.pdf (16 pages).
