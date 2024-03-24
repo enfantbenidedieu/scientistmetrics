@@ -156,7 +156,7 @@ def LikelihoodRatioTest(full_model,reduced_model=None):
     """
     Likelihood Ratio Test
 
-     A likelihood ratio test compares the goodness of fit of two nested regression models.
+    A likelihood ratio test compares the goodness of fit of two nested regression models.
 
     Parameters:
     -----------
