@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import statsmodels as smt
 from .r2_score import r2_score
 from .r2_tjur import r2_tjur

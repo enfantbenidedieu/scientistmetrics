@@ -1,5 +1,4 @@
-
-
+# -*- coding: utf-8 -*-
 import collections
 import warnings
 import numpy as np

@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 
 def r2_kullback(self,adjust=True):
     """

@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import pandas as pd
 import statsmodels as smt
 import statsmodels.api as sm
@@ -13,7 +13,7 @@ def check_autocorrelation(self,test="dw",nlags=None,maxiter=100):
 
     Parameters
     ----------
-    self : an instance of class OLS, Logit, MNLogit
+    self : an instance of class OLS, Logit, MNLogit or OrderedModel.
 
     test : {'dw','dg','nw','corc','lb'}, default = 'dw'.
             - 'dw' for Durbin-Watson Test
@@ -62,4 +62,5 @@ def check_autocorrelation(self,test="dw",nlags=None,maxiter=100):
             res = sm.stats.acorr_ljungbox(residuals(self), lags=[nlags],boxpierce=True, return_df=True)
         else:
             raise TypeError("'lb-bp' is only for OLS class")
+        
     return res

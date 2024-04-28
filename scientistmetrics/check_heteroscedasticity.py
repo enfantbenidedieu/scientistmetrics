@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import statsmodels as smt
 import statsmodels.stats.api as sms
 

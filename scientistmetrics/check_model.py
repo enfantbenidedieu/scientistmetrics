@@ -1,11 +1,10 @@
-
+# -*- coding: utf-8 -*-
 import numpy as np
 import pandas as pd
 import statsmodels as smt
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from statsmodels.stats.outliers_influence import OLSInfluence, GLMInfluence
-
 
 from .residuals import residuals
 

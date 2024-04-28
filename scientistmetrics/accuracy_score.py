@@ -1,5 +1,4 @@
-
-
+# -*- coding: utf-8 -*-
 import numpy as np
 from sklearn import metrics
 import statsmodels as smt

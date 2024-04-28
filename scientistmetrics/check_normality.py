@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import scipy as sp
 import statsmodels as smt
 import collections

@@ -1,62 +1,63 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
-from .association import association
-from .powerset import powersetmodel
 
-from .performance import (
-    lag,
-    diff,
-    extractAIC,
-    extractAICC,
-    extractBIC,
-    coefficients,
-    logLik,
-    LikelihoodRatioTest,
-    HosmerLemeshowTest,
-    MannWhitneyTest,
-    residuals,
-    rstandard,
-    rstudent,
-    explained_variance_score,
-    r2_score,
-    mean_squared_error,
-    max_error,
-    mean_absolute_error,
-    median_absolute_error,
-    r2_efron,
-    r2_mcfadden,
-    r2_mckelvey,
-    r2_count,
-    r2_count_adj,
-    r2_coxsnell,
-    r2_nagelkerke,
-    r2_tjur,
-    r2_kullback,
-    r2_somers,
-    r2_xu,
-    r2,
-    accuracy_score,
-    error_rate,
-    balanced_accuracy_score,
-    average_precision_score,
-    brier_score_loss,
-    f1_score,
-    log_loss,
-    precision_score,
-    recall_score,
-    roc_auc_score,
-    multiclass_roc,
-    check_autocorrelation,
-    check_heteroscedasticity,
-    check_model,
-    check_normality,
-    check_overdispersion,
-    check_sphericity_bartlett,
-    check_symmetric,
-    model_performance,
-    compare_performance,
-    ggroc
-)
+from .accuracy_score import accuracy_score
+from .association import association
+from .average_precision_score import average_precision_score
+from .balanced_accuracy_score import balanced_accuracy_score
+from .brier_score_loss import brier_score_loss
+from .check_autocorrelation import check_autocorrelation
+from .check_heteroscedasticity import check_heteroscedasticity
+from .check_kmo import check_kmo
+from .check_model import check_model
+from .check_normality import check_normality
+from .check_overdispersion import check_overdispersion
+from .check_spericity_bartlett import check_sphericity_bartlett
+from .check_symetric import check_symmetric
+from .coefficients import coefficients
+from .compare_performance import compare_performance
+from .diff import diff
+from .efron_rsquare import efron_rsquare
+from .error_rate import error_rate
+from .explained_variance_score import explained_variance_score
+from .extractAIC import extractAIC
+from .extractAICC import extractAICC
+from .extractBIC import extractBIC
+from .f1_score import f1_score
+from .ggroc import ggroc
+from .hosmerlemeshowtest import HosmerLemeshowTest
+from .lag import lag
+from .likelihoodratiotest import LikelihoodRatioTest
+from .log_loss import log_loss
+from .logLik import logLik
+from .mannwhitneytest import MannWhitneyTest
+from .max_error import max_error
+from .mean_absolute_error import mean_absolute_error
+from .mean_squared_error import mean_squared_error
+from .median_absolute_error import median_absolute_error
+from .model_performance import model_performance
+from .multiclass_roc import multiclass_roc
+from .powerset import powersetmodel
+from .precision_score import precision_score
+from .r2_count_adj import r2_count_adj
+from .r2_count import r2_count
+from .r2_coxsnell import r2_coxsnell
+from .r2_efron import r2_efron
+from .r2_kullback import r2_kullback
+from .r2_mcfadden import r2_mcfadden
+from .r2_mckelvey import r2_mckelvey
+from .r2_nagelkerke import r2_nagelkerke
+from .r2_score import r2_score
+from .r2_somers import r2_somers
+from .r2_tjur import r2_tjur
+from .r2_xu import r2_xu
+from .r2 import r2
+from .recall_score import recall_score
+from .residuals import residuals
+from .roc_auc_score import roc_auc_score
+from .rstandard import rstandard
+from .rstudent import rstudent
+
 
 __version__ = "0.0.4"
 __name__ = "discrimintools"

@@ -1,4 +1,5 @@
-
+# -*- coding: utf-8 -*-
+import numpy as np
 import statsmodels as smt
 from sklearn import metrics
  
@@ -23,6 +24,9 @@ def brier_score_loss(self=None,y_true=None,y_prob=None):
             Brier score loss.
     """
     if self is None:
+        n_label = len(np.unique(y_true))
+        if n_label != 2:
+            raise TypeError("'brier_score_loss' only applied for binary classification")
         ytrue = y_true
         yprob = y_prob
     elif self is not None:

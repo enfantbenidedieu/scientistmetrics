@@ -1,8 +1,8 @@
-# scientistmetrics
+# scientistmetrics : python library for model metrics
 
 ## About scientistmetrics
 
-**scientistmetrics** is a `Python` package for calculating correlation amongst categorical variables.
+scientistmetrics is a Python package dedicated for metrics and model performance.
 
 ## Why scientistmetrics?
 

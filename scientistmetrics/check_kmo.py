@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import math
 import collections
 import numpy as np

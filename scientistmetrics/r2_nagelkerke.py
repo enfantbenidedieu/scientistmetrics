@@ -1,6 +1,5 @@
-
+# -*- coding: utf-8 -*-
 import numpy as np
-import statsmodels as smt
 
 from .r2_coxsnell import r2_coxsnell
 

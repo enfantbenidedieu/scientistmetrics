@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import numpy as np
 
 def efron_rsquare(ytrue, yprob):
