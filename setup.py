@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-@author: enfantbenidedieu
-"""
 import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -9,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="scientistmetrics", 
-    version="0.0.3",
+    version="0.0.4",
     author="Duverier DJIFACK ZEBAZE",
     author_email="duverierdjifack@gmail.com",
     description="Python package for metrics and scoring : quantifying the quality of predictions",

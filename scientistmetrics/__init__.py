@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
-@author: enfantbenidedieu
-"""
-from __future__ import absolute_import
-from .association import scientistmetrics, ggheatmap
+from __future__ import annotations
+from .association import association
 from .powerset import powersetmodel
 
 from .performance import (
@@ -60,3 +57,8 @@ from .performance import (
     compare_performance,
     ggroc
 )
+
+__version__ = "0.0.4"
+__name__ = "discrimintools"
+__author__ = 'Duvérier DJIFACK ZEBAZE'
+__email__ = 'duverierdjifack@gmail.com' 

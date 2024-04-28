@@ -107,14 +107,11 @@ $$
 
 where $\mathcal{L}_{n}$ and $\mathcal{L}_{0}$ are the likelihhods for the model being fitted and the null model, respectively.
 
-```{python, eval=FALSE}
+```{python,eval=FALSE}
 # Cox & Snell R2
 from scientistmetrics import r2_coxsnell
 r2_coxsnell(glm)
 ```
-
-
-
 
 
 \subsubsection{McKelvey \& Zavoina $R^{2}$}
@@ -127,7 +124,7 @@ $$
 
 where $\sigma_{\widehat{y}}^{2}$ is the variance of the predicted probabilies.
 
-```{python,eval=FALSE}
+```{python}
 # McKelvey a Zavoina R2
 from scientistmetrics import r2_mckelvey
 r2_mckelvey(glm)
@@ -142,9 +139,10 @@ R_{\text{Nagelkerke}}^{2} = \dfrac{1 - \left(\dfrac{\ln\mathcal{L}(0)}{\ln \math
 $$
 
 
-```{python}
+```{python,eval=FALSE}
 # Nagelkerke R2
 from scientistmetrics import r2_nagelkerke
+r2_nagelkerke(glm)
 ```
 
 \subsubsection{Tjur $R^{2}$}
