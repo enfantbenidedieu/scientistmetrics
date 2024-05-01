@@ -49,11 +49,13 @@ Notebook is availabled.
 scientistmetrics requires :
 
 ```
-Python >=3.10
-Numpy >=1.23.5
-Pandas >=1.5.3
-Plotnine >=0.10.1
-Scipy >=1.10.1
+python >=3.10
+numpy >=1.26.4
+pandas >=2.2.2
+scikit-learn >=1.2.2
+plotnine >=0.10.1
+statsmodels >=0.14.0
+scipy >=1.10.1
 ```
 
 ## User installation
