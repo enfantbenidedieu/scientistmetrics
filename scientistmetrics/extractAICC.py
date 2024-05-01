@@ -10,9 +10,13 @@ def extractAICC(self):
     ----------
     self : an instance of statsmodels model class.
 
-    Returns
-    -------
+    Return
+    ------
     aicc : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     # Number of observations
     nobs = self.nobs

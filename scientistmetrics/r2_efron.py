@@ -22,6 +22,10 @@ def r2_efron(self=None,y_true=None, y_prob=None):
     Returns
     -------
     value : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         n_label = len(np.unique(y_true))

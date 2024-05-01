@@ -10,8 +10,23 @@ from .residuals import residuals
 
 def check_model(self, figsize=None):
     """
+    Visual check of model assumptions
+    ---------------------------------
+
+    Parameters
+    ----------
+
+    self : an object of class OLS
+
+    figsize : figure size
+
+    Return
+    ------
+    a matplotlib graph
     
-    
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if figsize is None:
@@ -28,6 +43,7 @@ def check_model(self, figsize=None):
         smx,smy = sm.nonparametric.lowess(residuals(self=self),self.predict(),frac=1./5.0,it=5, return_sorted = True).T
         axs[0,1].scatter(self.predict(),residuals(self=self))
         axs[0,1].plot(smx,smy)
+        axs[0,1].axhline(y=0,linestyle="--",color="gray")
         axs[0,1].set(xlabel="Fitted values",ylabel="Residuals",title="Linearity")
         # Homogeneity of Variance
         infl = OLSInfluence(self)
@@ -40,6 +56,7 @@ def check_model(self, figsize=None):
         smx,smy = sm.nonparametric.lowess(infl.resid_studentized_external,hii,frac=1./5.0,it=5, return_sorted = True).T
         axs[1,1].scatter(hii,infl.resid_studentized_external)
         axs[1,1].plot(smx,smy)
+        axs[1,1].axhline(y=0,linestyle="--",color="gray")
         axs[1,1].set(xlabel=r"Leverage$(h_{ii})$",ylabel="Std. residuals",title="Influential Observations")
         # Colinearity
         axs[2,0].set(title="Collinearity",ylabel="Variance Inflation \n Factor (VIF,log-scaled)",ylim=(1,11))

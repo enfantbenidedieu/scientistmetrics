@@ -2,13 +2,14 @@
 from sklearn import metrics
 import statsmodels as smt
 
-# Median Absolute Error
-def median_absolute_error(self=None,y_true=None,y_pred=None):
+def mdae(self=None,y_true=None,y_pred=None):
     """
-    Median Absolute Error regression loss
-    -------------------------------------
+    Median Absolute Error (MDAE) regression loss
+    --------------------------------------------
 
-    Median absolute error output is non-negative floating point. The best value is 0.0. Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#median-absolute-error).
+    Median absolute error output is non-negative floating point. The best value is 0.0. 
+    
+    Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#median-absolute-error).
 
     Parameters
     ----------
@@ -23,6 +24,10 @@ def median_absolute_error(self=None,y_true=None,y_pred=None):
     Returns
     -------
     loss : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         ytrue = y_true

@@ -2,17 +2,11 @@
 
 ## About scientistmetrics
 
-scientistmetrics is a Python package dedicated for metrics and model performance.
+scientistmetrics is a Python package for metrics and scoring : quantifying the quality of predictions
 
 ## Why scientistmetrics?
 
-The function provides the option for computing one of six measures of association between two nominal variables from the data given in a 2d contingency table: 
-* Pearson's chi-squared test : https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test
-* Phi coefficient : https://en.wikipedia.org/wiki/Phi_coefficient
-* G-test: https://en.wikipedia.org/wiki/G-test
-* Cramer's V : https://en.wikipedia.org/wiki/Cramer's_V
-* Tschuprow's T : https://en.wikipedia.org/wiki/Tschuprow's_T
-* Pearson contingency coefficient : https://www.statisticshowto.com/contingency-coefficient/
+
 
 Notebook is availabled.
 

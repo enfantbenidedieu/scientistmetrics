@@ -24,6 +24,9 @@ def r2_mcfadden(self,adjust=False):
     https://www.statease.com/docs/v12/contents/advanced-topics/glm/pseudo-r-squared/
     https://datascience.oneoffcoder.com/psuedo-r-squared-logistic-regression.html
 
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if adjust:
         return 1.0 - ((self.llf - (self.df_model - 1))/self.llnull)

@@ -24,6 +24,10 @@ def multiclass_roc(self=None,y_true=None, y_prob=None,multi_class="ovr"):
     -------
     auc : float.
         Area Under the Curve score.
+    
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self is None:

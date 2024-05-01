@@ -46,7 +46,11 @@ def ggroc(self=None,
 
     Return
     ------
-    a plotnine graph    
+    a plotnine graph
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com   
     """
     if self is None:
         n_label = len(np.unique(y_true))
@@ -69,7 +73,7 @@ def ggroc(self=None,
     p = (pn.ggplot(data,pn.aes(x="FPR",y="TPR"))+
          pn.geom_line(color=color,linetype=linetype,size=size,alpha=alpha)+
          pn.geom_abline(intercept=0,slope = 1,linetype="dashed")+
-         pn.labs(x="False Positive Rate (1 - specificity)",
+         pn.labs(x="False Positive Rate (1 - Specificity)",
                  y="True Positive Rate (Sensitivity)",title=title))
 
     # Add theme

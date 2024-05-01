@@ -9,8 +9,12 @@ def extractAIC(self):
     ----------
     self : an instance of statsmodels model class.
 
-    Returns
-    -------
+    Return
+    ------
     aic : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     return self.aic

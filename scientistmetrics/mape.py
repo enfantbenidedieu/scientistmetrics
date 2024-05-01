@@ -1,30 +1,28 @@
 # -*- coding: utf-8 -*-
 import statsmodels as smt
 from sklearn import metrics
-# Max Error
-def max_error(self=None,y_true=None,y_pred=True):
+ 
+def mape(self=None, y_true=None, y_pred=None):
     """
-    Max Error regression loss
-    -------------------------
+    Mean Absolute Percentage Error (MAPE) regression loss
+    -----------------------------------------------------
 
-    The max_error metric calculates the maximum residual error.
-
-    Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#max-error).
+    Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-absolute-error).
 
     Parameters:
     -----------
     self : an instance of class OLS.
 
-    y_true : array-like of shape (n_samples,)
+    y_true : array-like of shape (n_samples,) or (n_samples, n_outputs)
             Ground truth (correct) target values.
     
-    y_pred : array-like of shape (n_samples,)
+    y_pred : array-like of shape (n_samples,) or (n_samples, n_outputs)
             Estimated target values.
     
-    Return
+    Returns:
     ------
-    max_error : float
-                A positive floating point value (the best value is 0.0).
+    loss : float
+           MAPE output is non-negative floating point. The best value is 0.0.
     
     Author(s)
     ---------
@@ -33,9 +31,10 @@ def max_error(self=None,y_true=None,y_pred=True):
     if self is None:
         ytrue = y_true
         ypred = y_pred
-    elif self is not None:
+    else:
         if self.model.__class__ != smt.regression.linear_model.OLS:
             raise TypeError("'self' must be an object of class OLS")
         ytrue = self.model.endog
         ypred = self.predict()
-    return metrics.max_error(y_true=ytrue,y_pred=ypred)
+    return metrics.mean_absolute_percentage_error(y_true=ytrue,y_pred=ypred)
+    

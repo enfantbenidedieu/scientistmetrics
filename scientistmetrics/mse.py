@@ -2,11 +2,16 @@
 import statsmodels as smt
 from sklearn import metrics
 
-# Mean Squared Error/ Root Mean Squared Error
-def mean_squared_error(self=None, y_true=None, y_pred=None,squared=True):
+def mse(self=None, y_true=None, y_pred=None):
     """
-    (Root)Mean Squared Error ((R)MSE) regression loss
-    -------------------------------------------------
+    Mean Squared Error (MSE) regression loss
+    ----------------------------------------
+
+    Description
+    -----------
+    The mean square error is the mean of the sum of squared residuals, i.e. it measures the average of the squares of the errors. 
+    Less technically speaking, the mean square error can be considered as the variance of the residuals, i.e. 
+    the variation in the outcome the model doesn't explain. Lower values (closer to zero) indicate better fit.
 
     Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-squared-error).
 
@@ -19,14 +24,15 @@ def mean_squared_error(self=None, y_true=None, y_pred=None,squared=True):
 
     y_pred : array-like of shape (n_samples,)
             Estimated target values.
-    
-    squared : bool, default = True
-              if True returns MSE value, if False returns RMSE value
              
-    Returns
-    -------
+    Return
+    ------
     loss : float
             A non-negative floating point value (the best value is 0.0)
+    
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         ytrue = y_true
@@ -36,4 +42,4 @@ def mean_squared_error(self=None, y_true=None, y_pred=None,squared=True):
             raise TypeError("'self' must be an object of class OLS")
         ytrue = self.model.endog
         ypred = self.predict()
-    return metrics.mean_squared_error(y_true=ytrue,y_pred=ypred,squared=squared)
+    return metrics.mean_squared_error(y_true=ytrue,y_pred=ypred,squared=True)

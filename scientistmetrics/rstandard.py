@@ -18,9 +18,13 @@ def rstandard(self,choice=None):
     choice : {""sd_1","predictive"} for linear regression or {"pearson","deviance"} for logistic regression model.
                 - "pearson" : Standardized Pearson residuals
                 - "deviance" : Standardized deviance residuals
-    Returns
-    -------
+    Return
+    ------
     resid : pd.series of floats
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     # Set default choice

@@ -9,8 +9,12 @@ def extractBIC(self):
     ----------
     self : an instance of statsmodels model class.
 
-    Returns
-    -------
+    Return
+    ------
     bic : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     return self.bic

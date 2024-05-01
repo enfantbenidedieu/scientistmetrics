@@ -27,6 +27,10 @@ def MannWhitneyTest(self=None, y_true=None, y_prob=None):
     
     pvalue : float
             The normal critical probability
+    
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         n_label = len(np.unique(y_true))

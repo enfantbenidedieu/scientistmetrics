@@ -20,9 +20,13 @@ def explained_variance_score(self=None,y_true=None,y_pred=None):
     y_pred : array-like of shape (n_samples,)
             Estimated target values.
     
-    Return:
+    Return
     ------
     score : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self is None:

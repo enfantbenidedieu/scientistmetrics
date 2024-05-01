@@ -36,8 +36,11 @@ def check_overdispersion(self):
     References:
     -----------
     Gelman, A. and Hill, J. (2007) Data Analysis Using Regression and Multilevel/Hierarchical Models. 
-    Cambridge University Press, New York. page 115_
+    Cambridge University Press, New York. page 115
 
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self.model.__class__ != smt.discrete.discrete_model.Poisson:
         raise ValueError("Overdispersion checks can only be used for models from Poisson families or binomial families with trials > 1.")

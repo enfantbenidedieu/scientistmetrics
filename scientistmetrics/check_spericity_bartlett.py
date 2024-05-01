@@ -32,6 +32,10 @@ def check_sphericity_bartlett(X,method="pearson"):
     Analysis, Biometrika, 38, 337-344.
     [2] R. Sarmento and V. Costa, (2017)
     "Comparative Approaches to Using R and Python for Statistical Data Analysis", IGI-Global.
+
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if not isinstance(X,pd.DataFrame):

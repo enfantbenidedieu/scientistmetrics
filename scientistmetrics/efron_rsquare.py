@@ -14,9 +14,13 @@ def efron_rsquare(ytrue, yprob):
     yprob : array of float
             The predicted outcome probability
     
-    Return:
-    -------
+    Return
+    ------
     value : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     n = float(len(ytrue))
     t1 = np.sum(np.power(ytrue - yprob, 2.0))

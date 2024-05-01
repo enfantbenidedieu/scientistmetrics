@@ -5,7 +5,7 @@ import collections
 
 from .rstandard import rstandard
 
-def check_normality(self, test="shapiro", effects = "fixed"):
+def check_normality(self,test="shapiro"):
     """
     Check model for (non-)normality of residuals
     --------------------------------------------
@@ -19,9 +19,6 @@ def check_normality(self, test="shapiro", effects = "fixed"):
             - 'jarque-bera' : Perform the Jarque-Bera goodness of fit test on sample data.
             - 'agostino' : It is based on D'Agostino and Pearson's, test that combines skew and kurtosis to produce an omnibus test of normality.
             - 'kstest' : Perform a Kolmogorov-Smirnov Test
-    
-    effects : {'fixed','random'}
-            Should normality for residuals ("fixed") or random effects ("random") be tested? Only applies to mixed-effects models. May be abbreviated.
 
     Returns:
     -------
@@ -41,6 +38,10 @@ def check_normality(self, test="shapiro", effects = "fixed"):
     D'Agostino, R. and Pearson, E. S. (1973), “Tests for departure from normality”, Biometrika, 60, 613-622
     Shapiro, S. S., & Wilk, M. B. (1965). An analysis of variance test for normality (complete samples). Biometrika, 52(3/4), 591-611.
     Jarque, C. and Bera, A. (1980) “Efficient tests for normality, homoscedasticity and serial independence of regression residuals”, 6 Econometric Letters 255-259.
+
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self.model.__class__ != smt.regression.linear_model.OLS:

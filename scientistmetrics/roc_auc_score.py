@@ -18,10 +18,14 @@ def roc_auc_score(self=None, y_true=None, y_prob = None):
     y_prob : array-like of shape (n_samples,) , default =None.
             Probabilities of the positive class.
 
-    Return:
-    -------
+    Return
+    ------
     auc : float.
         Area Under the Curve score.
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         n_label = len(np.unique(y_true))
@@ -34,4 +38,4 @@ def roc_auc_score(self=None, y_true=None, y_prob = None):
             raise TypeError("'self' must be an object of class Logit")
         ytrue = self.model.endog
         yprob = self.predict()
-    return metrics.roc_auc_score(y_true=ytrue,y_prob=yprob)
+    return metrics.roc_auc_score(y_true=ytrue,y_score=yprob)

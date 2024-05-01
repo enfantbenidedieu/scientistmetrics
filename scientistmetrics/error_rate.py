@@ -19,8 +19,12 @@ def error_rate(self=None,y_true=None,y_pred=None,threshold=0.5):
     threshold : float,  default = 0.5.
             The threshold value is used to make a binary classification decision based on the probability of the positive class.
            
-    Returns:
+    Return
     ------
     error_rate : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     return 1.0 - accuracy_score(self=self,y_true=y_true,y_pred=y_pred,threshold=threshold)

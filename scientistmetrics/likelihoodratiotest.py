@@ -53,6 +53,10 @@ def LikelihoodRatioTest(full_model,reduced_model=None):
 
     If the p-value of the test is less than a certain threshold of significance (e.g., 0.05), we can reject the null hypothesis and 
     conclude that the full model provides a significantly better fit.
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if reduced_model is None:
         if full_model.model.__class__ == smt.regression.linear_model.OLS:

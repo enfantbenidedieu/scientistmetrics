@@ -23,8 +23,8 @@ def association(X,method="cramer",correction=False,lambda_ = None):
     lambda_ : float or str, optional
         Inherited from https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html
 
-    Returns:
-    --------
+    Return
+    ------
     statistic : DataFrame
         value of the test statistic   
     

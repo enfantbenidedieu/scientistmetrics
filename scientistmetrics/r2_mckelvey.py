@@ -17,9 +17,13 @@ def r2_mckelvey(self=None,y_prob=None):
     Return
     ------
     value : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
-        yprob = np.array(y_prob)
+        y_prob = np.array(y_prob)
     else:
-        yprob = self.predict()
-    return np.var(yprob) / (np.var(yprob) + (np.power(np.pi, 2.0) / 3.0) )
+        y_prob = self.predict()
+    return np.var(y_prob) / (np.var(y_prob) + (np.power(np.pi, 2.0) / 3.0) )

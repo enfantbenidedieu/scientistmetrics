@@ -20,6 +20,10 @@ def lag(x,n=1):
     Return
     ------
     Returns suitably shifted 
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if n==0:
         return x

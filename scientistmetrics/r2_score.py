@@ -24,7 +24,11 @@ def r2_score(self=None,y_true=None,y_pred=None,adjust=False):
     Returns:
     ------
     z : float
-        The r2 score or adjusted r2 score.      
+        The r2 score or adjusted r2 score.
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com   
     """
     if adjust is False:
         if self is None:

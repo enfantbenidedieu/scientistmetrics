@@ -15,7 +15,7 @@ def brier_score_loss(self=None,y_true=None,y_prob=None):
     y_true : array-like of shape (n_samples,) , default = None.
             True binary labels or binary label indicators
     
-    y_prob : array-like of shape (n_samples,) , default =None.
+    y_score : array-like of shape (n_samples,) , default =None.
             Probabilities of the positive class.
 
     Returns:

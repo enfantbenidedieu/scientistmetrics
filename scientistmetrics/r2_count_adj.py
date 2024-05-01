@@ -36,6 +36,10 @@ def r2_count_adj(self=None,y_true=None,y_prob=None,threshold=0.5):
     Return
     ------
     score : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         n_label = len(np.unique(y_true))

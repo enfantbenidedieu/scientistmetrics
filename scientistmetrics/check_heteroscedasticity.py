@@ -28,6 +28,10 @@ def check_heteroscedasticity(self, test = "bp",alpha=0.05,drop=None):
     Return:
     -------
     results : dict
+
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self.model.__class__ != smt.regression.linear_model.OLS:

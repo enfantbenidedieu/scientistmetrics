@@ -2,11 +2,25 @@
 import numpy as np
 import pandas as pd
 import statsmodels as smt
-from sklearn import metrics
 
 from .extractAIC import extractAIC
 from .extractAICC import extractAICC
 from .extractBIC import extractBIC
+
+from .mae import mae
+from .mse import mse
+from .rmse import rmse
+from .mdae import mdae
+from .mdape import mdape
+from .mape import mape
+from .accuracy_score import accuracy_score
+from .recall_score import recall_score
+from .precision_score import precision_score
+from .f1_score import f1_score
+from .log_loss import log_loss
+from .roc_auc_score import roc_auc_score
+from .r2_coxsnell import r2_coxsnell
+from .r2_nagelkerke import r2_nagelkerke
 
 # Compare performance
 def compare_performance(model=list()):
@@ -19,41 +33,52 @@ def compare_performance(model=list()):
     Returns
     -------
     DataFrame
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if not isinstance(model,list):
         raise TypeError("'model' must be a list of model.")
 
     def evaluate(i,name):
-        res = pd.DataFrame({"AIC" : extractAIC(name), # Akaike information criterion.
-                            "AICC":extractAICC(name), # 
-                             "BIC" : extractBIC(name), # Bayesian information criterion.
+        res = pd.DataFrame({"aic" : extractAIC(name), # Akaike information criterion.
+                            "aicc":extractAICC(name), # 
+                             "bic" : extractBIC(name), # Bayesian information criterion.
                              "Log-Likelihood" : name.llf}, # Log-likelihood of model
                              index=["Model " + str(i+1)])
         if name.model.__class__  == smt.regression.linear_model.OLS:
-            res["R-squared"] = name.rsquared
-            res["Adj. rsquared"] = name.rsquared_adj
-            ytrue, ypred= name.model.endog, name.predict()
-            res["RMSE"] = metrics.mean_squared_error(y_true=ytrue,y_pred=ypred,squared=True)
+            res["r2"] = name.rsquared
+            res["adj. r2"] = name.rsquared_adj
+            res["mse"] = mse(name)
+            res["rmse"] = rmse(name)
+            res["mae"] = mae(name)
+            res["mape"] = mape(name)
+            res["mdae"] = mdae(name)
+            res["mdape"] = mdape(name)
             res["sigma"] = np.sqrt(name.scale)
             res.insert(0,"Name","ols")
         elif name.model.__class__ == smt.discrete.discrete_model.Logit:
-            res["Pseudo R-squared"] = name.prsquared  # McFadden's pseudo-R-squared.
-            ytrue, yprob = name.model.endog, name.predict()
-            ypred = np.where(yprob > 0.5, 1, 0)
-            res["log loss"] = metrics.log_loss(y_true=ytrue,y_pred=ypred)
+            res["pseudo r2"] = name.prsquared  # McFadden's pseudo-R-squared.
+            res["coxsnell r2"] = r2_coxsnell(name)
+            res["nagelkerke r2"] = r2_nagelkerke(name)
+            res["accuracy"] = accuracy_score(name)
+            res["recall"] = recall_score(name)
+            res["precision"] = precision_score(name)
+            res["f1 score"] = f1_score(name)
+            res["log loss"] = log_loss(name)
+            res["auc"] = roc_auc_score(name)
             res.insert(0,"Name","logit")
         elif name.model.__class__ == smt.tsa.arima.model.ARIMA:
-            res["MAE"] = name.mae
-            res["RMSE"] = np.sqrt(name.mse)
-            res["SSE"] = name.sse
+            res["mae"] = name.mae
+            res["rmse"] = np.sqrt(name.mse)
+            res["sse"] = name.sse
             res.insert(0,"Name","arima")
         elif name.model.__class__ == smt.discrete.discrete_model.Poisson:
             res.insert(0,"Name","poisson")
         elif name.model.__class__ == smt.discrete.discrete_model.MNLogit:
             res.insert(0,"Name","multinomial")
-        elif name.model.__class__ == smt.miscmodels.ordinal_model.OrderedModel:
-            res.insert(0,"Name","ordinal")
         return res
     res1 = pd.concat(map(lambda x : evaluate(x[0],x[1]),enumerate(model)),axis=0)
     return res1

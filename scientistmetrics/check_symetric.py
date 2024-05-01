@@ -23,6 +23,10 @@ def check_symmetric(x):
     ------
     Uses Hotelling and Solomons test of symmetry by testing if the standardized
     nonparametric skew (\eqn{\frac{(Mean - Median)}{SD}}) is different than 0.
+
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if isinstance(x,pd.Series):

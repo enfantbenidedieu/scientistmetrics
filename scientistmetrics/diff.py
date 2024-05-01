@@ -13,6 +13,10 @@ def diff(x,lags=1):
     Return
     ------
     Returns suitably lagged
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if isinstance(x,pd.Series):
         x = x

@@ -13,5 +13,9 @@ def logLik(self):
     ------
     llf :float
         Log-likelihood of model
+    
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     return self.llf

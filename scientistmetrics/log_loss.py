@@ -25,6 +25,10 @@ def log_loss(self=None,y_true=None, y_pred=None, threshold=0.5):
     -------
     loss : float
             Log loss, aka logistic loss or cross-entropy loss.
+    
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self is None:

@@ -2,11 +2,10 @@
 import statsmodels as smt
 from sklearn import metrics
  
-# Mean Absolute Error
-def mean_absolute_error(self=None, y_true=None, y_pred=None, percentage=False):
+def mae(self=None, y_true=None, y_pred=None):
     """
-    Mean Absolute (Percentage) Error regression loss
-    ------------------------------------------------
+    Mean Absolute Error (MAE) regression loss
+    -----------------------------------------
 
     Read more in the [User Guide](https://scikit-learn.org/stable/modules/model_evaluation.html#mean-absolute-error).
 
@@ -20,13 +19,14 @@ def mean_absolute_error(self=None, y_true=None, y_pred=None, percentage=False):
     y_pred : array-like of shape (n_samples,) or (n_samples, n_outputs)
             Estimated target values.
     
-    percentage : bool, default = False;
-                if True returns MAPE, il False returns MAE
-    
-    Returns:
+    Return
     ------
     loss : float
-           MA(P)E output is non-negative floating point. The best value is 0.0.
+           MAE output is non-negative floating point. The best value is 0.0.
+    
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         ytrue = y_true
@@ -36,8 +36,4 @@ def mean_absolute_error(self=None, y_true=None, y_pred=None, percentage=False):
             raise TypeError("'self' must be an object of class OLS")
         ytrue = self.model.endog
         ypred = self.predict()
-    
-    if percentage:
-        return metrics.mean_absolute_percentage_error(y_true=ytrue,y_pred=ypred)
-    else:
-        return metrics.mean_absolute_error(y_true=ytrue,y_pred=ypred)
+    return metrics.mean_absolute_error(y_true=ytrue,y_pred=ypred)

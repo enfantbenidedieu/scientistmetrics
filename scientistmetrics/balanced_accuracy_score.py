@@ -21,10 +21,14 @@ def balanced_accuracy_score(self=None,y_true=None,y_pred=None, threshold=0.5):
     threshold : float,  default = 0.5.
             The threshold value is used to make a binary classification decision based on the probability of the positive class.
            
-    Returns
-    --------
+    Return
+    ------
     balanced_accuracy : float
                         Balanced accuracy score.
+    
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         n_label = len(np.unique(y_true))

@@ -12,13 +12,17 @@ def r2_kullback(self,adjust=True):
     adjust : bool, default = True
             if True returns the adjusted R2 value
     
-    Returns:
-    --------
+    Return
+    ------
     value : float
 
     References:
     -----------
     Cameron, A. C. and Windmeijer, A. G. (1997) An R-squared measure of goodness of fit for some common nonlinear regression models. Journal of Econometrics, 77: 329-342.
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if adjust:
         adj = (self.df_model+self.df_resid)/self.df_resid

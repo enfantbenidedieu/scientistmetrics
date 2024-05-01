@@ -16,6 +16,10 @@ def r2_nagelkerke(self):
     Return
     ------
     value : float
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     max_r2coxsnell = 1 - np.exp(self.llnull)**(2/self.nobs)
     return r2_coxsnell(self)/max_r2coxsnell

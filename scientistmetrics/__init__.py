@@ -30,12 +30,14 @@ from .lag import lag
 from .likelihoodratiotest import LikelihoodRatioTest
 from .log_loss import log_loss
 from .logLik import logLik
+from .mae import mae
 from .mannwhitneytest import MannWhitneyTest
+from .mape import mape
 from .max_error import max_error
-from .mean_absolute_error import mean_absolute_error
-from .mean_squared_error import mean_squared_error
-from .median_absolute_error import median_absolute_error
+from .mdae import mdae
+from .mdape import mdape
 from .model_performance import model_performance
+from .mse import mse
 from .multiclass_roc import multiclass_roc
 from .powerset import powersetmodel
 from .precision_score import precision_score
@@ -54,6 +56,7 @@ from .r2_xu import r2_xu
 from .r2 import r2
 from .recall_score import recall_score
 from .residuals import residuals
+from .rmse import rmse
 from .roc_auc_score import roc_auc_score
 from .rstandard import rstandard
 from .rstudent import rstudent

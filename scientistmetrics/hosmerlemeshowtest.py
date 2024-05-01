@@ -29,6 +29,10 @@ def HosmerLemeshowTest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
     Hosmer, David W., and Stanley Lemeshow. 2000. Applied Logistic Regression. Second edtion. New York: John Wiley & Sons.
     https://github.com/TristanFauvel/Hosmer-Lemeshow/blob/master/HosmerLemeshow.py
     https://www.bookdown.org/rwnahhas/RMPH/blr-gof.html
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
         n_label = len(np.unique(y_true))
@@ -45,11 +49,11 @@ def HosmerLemeshowTest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
     df = pd.DataFrame({'y' : ytrue,'score' : yprob})
     df["classe"] = pd.qcut(df.score,q=Q,**kwargs)
     # Effectifs par groupe
-    n_tot = df.pivot_table(index='classe',values='y',aggfunc='count').values[:,0]
+    n_tot = df.pivot_table(index='classe',values='y',aggfunc='count',observed=False).values[:,0]
     # Somme des scores par groupe
-    s_scores = df.pivot_table(index='classe',values="score",aggfunc="sum").values[:,0]
+    s_scores = df.pivot_table(index='classe',values="score",aggfunc="sum",observed=False).values[:,0]
     # Nombre de positifs par groupes
-    n_pos = df.pivot_table(index='classe',values='y',aggfunc='sum').values[:,0]
+    n_pos = df.pivot_table(index='classe',values='y',aggfunc='sum',observed=False).values[:,0]
     # Nombre de négatifs par groupe
     n_neg = n_tot - n_pos
     # Statistic de Hosmer - Lemeshow

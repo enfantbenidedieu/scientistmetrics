@@ -13,8 +13,8 @@ def r2_tjur(self):
     ----------
     self : an instance of class Logit
 
-    Returns
-    -------
+    Return
+    ------
     value :float
 
     References
@@ -22,6 +22,10 @@ def r2_tjur(self):
     Tue Tjur. Coefficients of determination in logistic regression models-a new proposal: the coefficient of 
     discrimination. The American Statistician, 63(4):366-372, November 2009.
     https://www.statease.com/docs/v12/contents/advanced-topics/glm/tjur-pseudo-r-squared/
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self.model.__class__ != smt.discrete.discrete_model.Logit:
         raise TypeError("'self' must be an object of class Logit")

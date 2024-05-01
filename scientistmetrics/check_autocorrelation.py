@@ -30,6 +30,10 @@ def check_autocorrelation(self,test="dw",nlags=None,maxiter=100):
     test : float, dict/pandas dataframe
 
     Notes : See  http://web.vu.lt/mif/a.buteikis/wp-content/uploads/PE_Book/4-8-Multiple-autocorrelation.html
+
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if test == "dw":
         if self.model.__class__ not in [smt.regression.linear_model.OLS,smt.discrete.discrete_model.Logit]:

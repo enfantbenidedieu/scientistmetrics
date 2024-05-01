@@ -18,6 +18,10 @@ def check_kmo(X):
     Return
     ------
     KMO : dict
+
+    Author(s)
+    --------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if not isinstance(X,pd.DataFrame):

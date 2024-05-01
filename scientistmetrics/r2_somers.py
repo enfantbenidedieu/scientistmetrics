@@ -17,6 +17,10 @@ def r2_somers(self,threshold=0.5):
     Returns:
     -------
     Dxy : namedtuple
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self.model.__class__ != smt.discrete.discrete_model.Logit:

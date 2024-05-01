@@ -4,7 +4,7 @@ import statsmodels as smt
 from statsmodels.stats.outliers_influence import OLSInfluence, GLMInfluence
 
 from .residuals import residuals
-# Studentized residuals    
+   
 def rstudent(self):
     """
     Studentized residuals
@@ -14,18 +14,20 @@ def rstudent(self):
     ----------
     self : an object of class OLS, Logit
 
-    Returns
-    -------
+    Return
+    ------
     resid : pd.series of float.
 
     Reference
     ---------
     https://en.wikipedia.org/wiki/Studentized_residual
+
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
-    if self.model.__class__ == smt.discrete.discrete_model.MNLogit:
-        raise TypeError("no applicable method for 'rstudent' applied to an object of class MNLogit")
-    elif self.model.__class__ == smt.miscmodels.ordinal_model.OrderedModel:
-        raise TypeError("no applicable method for 'rstudent' applied to an object of class OrderedModel")
+    if self.model.__class__ not in [smt.regression.linear_model.OLS,smt.discrete.discrete_model.Logit]:
+        raise TypeError("'self' must be an object of class OLS, Logit")
     
     # Studentized residuals for Ordinary Least Squares
     if self.model.__class__ == smt.regression.linear_model.OLS:
