@@ -18,7 +18,6 @@ setuptools.setup(
                       "pandas>=2.2.2",
                       "scikit-learn>=1.2.2",
                       "plotnine>=0.10.1",
-                      "mapply>=0.1.21",
                       "statsmodels>=0.14.0",
                       "scipy>=1.10.1"],
     python_requires=">=3.10",

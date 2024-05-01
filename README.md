@@ -6,7 +6,39 @@ scientistmetrics is a Python package for metrics and scoring : quantifying the q
 
 ## Why scientistmetrics?
 
+### Measure of association with categoricals variables
 
+scientistmetrics provides the option for computing one of six measures of association between two nominal variables from the data given in a 2d contingency table:
+
+* Chi - squard test : [https://en.wikipedia.org/wiki/Chi-squared_test](https://en.wikipedia.org/wiki/Chi-squared_test)
+* Cramer's V : [https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V](https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V)
+* Tschuprow's T : [https://en.wikipedia.org/wiki/Tschuprow%27s_T](https://en.wikipedia.org/wiki/Tschuprow%27s_T)
+* G-test : [https://en.wikipedia.org/wiki/G-test](https://en.wikipedia.org/wiki/G-test)
+* Phi coefficient : [https://en.wikipedia.org/wiki/Phi_coefficient](https://en.wikipedia.org/wiki/Phi_coefficient)
+* Pearson contingence coefficient : [https://www.statisticshowto.com/contingency-coefficient/](https://www.statisticshowto.com/contingency-coefficient/)
+
+### Classification metrics
+
+scientistmetrics provides metrics for classification problem :
+
+* accuracy score
+* f1 score
+* precision
+* recall
+* etc...
+
+### Regression metrics
+
+scientistmetrics provides metrics for regression problem :
+
+* Rsquared
+* Adjusted Rsquared
+* Mean squared error
+* etc...
+
+### Powerset model
+
+scientistmetrics provides a function that gives a set of all subsets model.
 
 Notebook is availabled.
 
@@ -32,6 +64,6 @@ You can install scientistmetrics using `pip` :
 pip install scientistmetrics
 ```
 
-## Author
+## Author(s)
 
-Duvérier DJIFACK ZEBAZE
+Duvérier DJIFACK ZEBAZE [duverierdjifack@gmail.com](mailto:duverierdjifack@gmail.com)
