@@ -18,6 +18,7 @@ def check_normality(self, test="shapiro", effects = "fixed"):
             - 'shapiro' : Perform the Shapiro-Wilk test for normality.
             - 'jarque-bera' : Perform the Jarque-Bera goodness of fit test on sample data.
             - 'agostino' : It is based on D'Agostino and Pearson's, test that combines skew and kurtosis to produce an omnibus test of normality.
+            - 'kstest' : Perform a Kolmogorov-Smirnov Test
     
     effects : {'fixed','random'}
             Should normality for residuals ("fixed") or random effects ("random") be tested? Only applies to mixed-effects models. May be abbreviated.
@@ -45,6 +46,9 @@ def check_normality(self, test="shapiro", effects = "fixed"):
     if self.model.__class__ != smt.regression.linear_model.OLS:
         raise TypeError("Checking normality of residuals is only appropriate for linear models.")
     
+    if test not in ["shapiro","jarque-bera","agostino","kstest"]:
+        raise ValueError("'test' should be one of 'shapiro', 'jarque-bera', 'agostino', 'kstest'")
+    
     resid = rstandard(self,choice="sd_1")
     
     if test == 'shapiro':
@@ -53,5 +57,7 @@ def check_normality(self, test="shapiro", effects = "fixed"):
         stat = sp.stats.jarque_bera(resid)
     elif test == 'agostino':
         stat = sp.stats.normaltest(resid)
+    elif test == "kstest":
+        stat = sp.stats.kstest(resid, 'norm')
     Result = collections.namedtuple("NormalityTest",["statistic","pvalue"],rename=False)
     return Result(statistic=stat.statistic,pvalue=stat.pvalue)

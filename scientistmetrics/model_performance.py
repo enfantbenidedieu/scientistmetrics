@@ -35,8 +35,14 @@ def model_performance(self, metrics = "common"):
     ------
     metrics
     """
+
+    if metrics not in ["all","common"]:
+        raise ValueError("'metrics' should be one of 'all', 'common'")
+
     # Common metrics
-    res = {"AIC" :extractAIC(self),"AICC":extractAICC(self),"BIC" :extractBIC(self)}
+    res = {"AIC" :extractAIC(self),
+           "AICC":extractAICC(self),
+           "BIC" :extractBIC(self)}
 
     if metrics == "all":
         if self.model.__class__  == smt.regression.linear_model.OLS:

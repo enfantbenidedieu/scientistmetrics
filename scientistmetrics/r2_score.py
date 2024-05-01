@@ -37,5 +37,5 @@ def r2_score(self=None,y_true=None,y_pred=None,adjust=False):
         if self is None:
             raise TypeError("`adjust` is only for training model.")
         if self.model.__class__ != smt.regression.linear_model.OLS:
-            raise TypeError("'r2_score' only applied to an object of class OLS.")
+            raise TypeError("'r2_score' only applied to an object of class OLS")
         return self.rsquared_adj

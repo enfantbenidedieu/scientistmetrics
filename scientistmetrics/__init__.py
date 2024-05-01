@@ -58,7 +58,6 @@ from .roc_auc_score import roc_auc_score
 from .rstandard import rstandard
 from .rstudent import rstudent
 
-
 __version__ = "0.0.4"
 __name__ = "discrimintools"
 __author__ = 'Duvérier DJIFACK ZEBAZE'
