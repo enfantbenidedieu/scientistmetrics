@@ -33,12 +33,8 @@ def mdape(self=None,y_true=None,y_pred=None):
     ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
-    if self is None:
-        ytrue = y_true
-        ypred = y_pred
-    else:
+    if self is not None:
         if self.model.__class__ != smt.regression.linear_model.OLS:
             raise TypeError("'self' must be an object of class OLS")
-        ytrue = self.model.endog
-        ypred = self.predict()
-    return np.median(np.abs(ytrue - ypred)/ytrue)
+        y_true, y_pred = self.model.endog, self.predict()
+    return np.median(np.abs(y_true - y_pred)/y_true)

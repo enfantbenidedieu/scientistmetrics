@@ -34,7 +34,7 @@ def check_sphericity_bartlett(X,method="pearson"):
     "Comparative Approaches to Using R and Python for Statistical Data Analysis", IGI-Global.
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 

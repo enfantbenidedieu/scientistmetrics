@@ -60,6 +60,10 @@ def association(X,method="cramer",correction=False,lambda_ = None):
     # log - likelihood
     if method == "gtest":
         lambda_ = "log-likelihood"
+    
+    # For chi2
+    if method == "chi2":
+        correction = False
 
     # note that because we ignore redundant combinations,
     # we perform half the calculations, so we get the results
@@ -79,6 +83,6 @@ def association(X,method="cramer",correction=False,lambda_ = None):
         else:
             res_association = st.contingency.association(input_tab, method=method,correction=correction,lambda_=lambda_)
 
-        matrix[i][j], matrix[j][i] = res_association, res_association
+        matrix.loc[i,j], matrix.loc[j,i] =  res_association, res_association
 
     return matrix

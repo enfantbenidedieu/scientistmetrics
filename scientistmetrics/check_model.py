@@ -25,7 +25,7 @@ def check_model(self, figsize=None):
     a matplotlib graph
     
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 

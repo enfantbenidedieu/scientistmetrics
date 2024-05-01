@@ -9,7 +9,7 @@ def r2_coxsnell(self):
 
     Parameters
     ----------
-    self : an instance of class Logit, MNLogit or OrderedModel
+    self : an instance of class Logit, MNLogit
 
     Return
     ------

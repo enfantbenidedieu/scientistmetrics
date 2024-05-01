@@ -53,21 +53,17 @@ def ggroc(self=None,
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com   
     """
     if self is None:
-        n_label = len(np.unique(y_true))
-        if n_label != 2:
-            raise TypeError("'ggroc' only applied for binary classification")
-        ytrue = y_true
-        yscore = y_score
+        if len(np.unique(y_true)) != 2:
+            raise TypeError("'ggroc()' only applied for binary classification")
     else:
         if self.model.__class__ != smt.discrete.discrete_model.Logit:
             raise TypeError("'self' must be an object of class Logit")
-        ytrue = self.model.endog 
-        yscore = self.predict()
+        y_true, y_score = self.model.endog, self.predict()
     
     if title is None:
         title = "ROC Curve"
 
-    fpr, tpr, _ = metrics.roc_curve(ytrue,yscore,pos_label=pos_label)
+    fpr, tpr, _ = metrics.roc_curve(y_true,y_score,pos_label=pos_label)
     data = pd.DataFrame({"FPR":fpr,"TPR" : tpr})
 
     p = (pn.ggplot(data,pn.aes(x="FPR",y="TPR"))+

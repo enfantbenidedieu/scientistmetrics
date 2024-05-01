@@ -5,7 +5,7 @@ import pandas as pd
 import statsmodels as smt
 import collections
 
-def HosmerLemeshowTest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
+def HosmerLemeshowTest(self=None,Q=10,y_true=None,y_score=None,**kwargs):
     """
     Hosmer-Lemeshow goodness of fit test
     ------------------------------------
@@ -18,6 +18,12 @@ def HosmerLemeshowTest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
 
     Q : int, optional, default=10
         The number of groups
+
+    y_true : 1d array-like, or label indicator array, default = None
+            Ground thuth (correct) labels
+    
+    y_score : array-like of shape (n_samples,) , default =None.
+            Probabilities of the positive class.
 
     Returns
     -------
@@ -35,18 +41,14 @@ def HosmerLemeshowTest(self=None,Q=10,y_true=None,y_prob=None,**kwargs):
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
-        n_label = len(np.unique(y_true))
-        if n_label != 2:
-            raise TypeError("'HosmerLemeshowTest' only applied for binary classification")
-        ytrue = y_true
-        yprob = y_prob
+        if len(np.unique(y_true)) != 2:
+            raise TypeError("'HosmerLemeshowTest()' only applied for binary classification")
     elif self is not None:
         if self.model.__class__ != smt.discrete.discrete_model.Logit:
             raise TypeError("'self' must be an object of class Logit")
-        ytrue = self.model.endog
-        yprob = self.predict()
+        y_true, y_score = self.model.endog, self.predict()
     
-    df = pd.DataFrame({'y' : ytrue,'score' : yprob})
+    df = pd.DataFrame({'y' : y_true,'score' : y_score})
     df["classe"] = pd.qcut(df.score,q=Q,**kwargs)
     # Effectifs par groupe
     n_tot = df.pivot_table(index='classe',values='y',aggfunc='count',observed=False).values[:,0]

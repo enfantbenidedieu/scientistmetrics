@@ -39,11 +39,11 @@ def check_overdispersion(self):
     Cambridge University Press, New York. page 115
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self.model.__class__ != smt.discrete.discrete_model.Poisson:
-        raise ValueError("Overdispersion checks can only be used for models from Poisson families or binomial families with trials > 1.")
+        raise ValueError("'check_overdispersion()' can only be used for models from Poisson families or binomial families with trials > 1.")
     
     # True values
     y_true = self.model.endog

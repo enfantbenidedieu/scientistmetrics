@@ -29,12 +29,8 @@ def explained_variance_score(self=None,y_true=None,y_pred=None):
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
-    if self is None:
-        ytrue = y_true
-        ypred = y_pred
-    else:
+    if self is not None:
         if self.model.__class__ != smt.regression.linear_model.OLS:
             raise ValueError("'self' must be an object of class OLS")
-        ytrue = self.model.endog
-        ypred = self.predict()
-    return metrics.explained_variance_score(y_true=ytrue,y_pred=ypred)
+        y_true, y_pred = self.model.endog, self.predict()
+    return metrics.explained_variance_score(y_true=y_true,y_pred=y_pred)

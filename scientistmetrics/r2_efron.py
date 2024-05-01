@@ -28,9 +28,8 @@ def r2_efron(self=None,y_true=None, y_prob=None):
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
-        n_label = len(np.unique(y_true))
-        if n_label != 2:
-            raise TypeError("'r2_efron' only applied for binary classification")
+        if len(np.unique(y_true)) != 2:
+            raise TypeError("'r2_efron()' only applied for binary classification")
     else:
         if self.model.__class__ != smt.discrete.discrete_model.Logit:
             raise TypeError("'self' must be an object of class Logit")

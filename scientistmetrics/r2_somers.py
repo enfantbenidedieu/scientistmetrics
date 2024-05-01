@@ -22,9 +22,8 @@ def r2_somers(self,threshold=0.5):
     ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
-
     if self.model.__class__ != smt.discrete.discrete_model.Logit:
-        raise TypeError("'r2_somers' only applied to an object of class Logit.")
+        raise TypeError("'r2_somers()' only applied to an object of class Logit.")
     
     y_true = self.model.endog
     y_pred = np.where(self.predict() < threshold,0.0,1.0)

@@ -31,18 +31,14 @@ def multiclass_roc(self=None,y_true=None, y_prob=None,multi_class="ovr"):
     """
 
     if self is None:
-        n_label = len(np.unique(y_true))
-        if n_label < 3:
-            raise TypeError("'multiclass_roc' only applied for multiclass classification")
-        ytrue = y_true
-        yprob = y_prob
+        if len(np.unique(y_true)) < 3:
+            raise TypeError("'multiclass_roc()' only applied for multiclass classification")
     else:
         if self.model.__class__ != smt.discrete.discrete_model.MNLogit:
             raise TypeError("'self' must be an object of class MNLogit")
-        ytrue = self.model.endog
-        yprob = self.predict()
+        y_true, y_prob = self.model.endog, self.predict()
     
     if multi_class not in ["ovo","ovr"]:
         raise ValueError("'multi_class' should be on of `ovo`, `ovr`")
     
-    return metrics.roc_auc_score(y_true=ytrue,y_prob=yprob,multi_class=multi_class)
+    return metrics.roc_auc_score(y_true=y_true,y_prob=y_prob,multi_class=multi_class)

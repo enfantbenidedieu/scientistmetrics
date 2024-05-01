@@ -20,7 +20,7 @@ def check_kmo(X):
     KMO : dict
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 

@@ -233,7 +233,7 @@ def powersetmodel(DTrain=pd.DataFrame,
                "error rate" : error_rate(y_true=ytrue,y_pred=ypred),
                "recall score" : recall_score(y_true=ytrue,y_pred=ypred),
                "f1 score" : f1_score(y_true=ytrue,y_pred=ypred),
-               "auc" : roc_auc_score(y_true=ytrue,y_prob=yprob)}
+               "auc" : roc_auc_score(y_true=ytrue,y_score=yprob)}
         return pd.DataFrame(res,index=["metrics"])
     
     def glm_estimated(y,x,df1,df2):

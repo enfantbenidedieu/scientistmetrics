@@ -25,7 +25,7 @@ def check_symmetric(x):
     nonparametric skew (\eqn{\frac{(Mean - Median)}{SD}}) is different than 0.
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 

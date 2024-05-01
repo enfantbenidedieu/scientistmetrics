@@ -16,7 +16,7 @@ def coefficients(self):
     table : table of float
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self.model.__class__ == smt.regression.linear_model.OLS:

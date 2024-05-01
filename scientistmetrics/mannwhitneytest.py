@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import statsmodels as smt
 
-def MannWhitneyTest(self=None, y_true=None, y_prob=None):
+def MannWhitneyTest(self=None, y_true=None, y_score=None):
     """
     Mann - Whitney Test
     -------------------
@@ -14,10 +14,10 @@ def MannWhitneyTest(self=None, y_true=None, y_prob=None):
     -----------
     self : an instance of class Logit, default=None.
 
-    ytrue : array of int, default = None.
+    y_true : array of int, default = None.
             The outcome label (e.g. 1 or 0)
 
-    yprob : array of float, default = None.
+    y_score : array of float, default = None.
             The predicted outcome probability
 
     Return:
@@ -33,21 +33,17 @@ def MannWhitneyTest(self=None, y_true=None, y_prob=None):
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
-        n_label = len(np.unique(y_true))
-        if n_label != 2:
-            raise TypeError("'MannWhitneyTest' only applied for binary classification")
-        ytrue = y_true
-        yprob = y_prob
+        if len(np.unique(y_true)) != 2:
+            raise TypeError("'MannWhitneyTest()' only applied for binary classification")
     else:
         if self.model.__class__ != smt.discrete.discrete_model.Logit:
             raise TypeError("'self' must be an object of class Logit")
-        ytrue = self.model.endog
-        yprob = self.predict()
+        y_true, y_score = self.model.endog, self.predict()
         
-    df = pd.DataFrame({'y' : ytrue,'score' : yprob})
-    n_moins, n_plus = df.y.value_counts()
+    df = pd.DataFrame({'y' : y_true,'score' : y_score})
+    n_moins, n_plus = df["y"].value_counts()
     df = df.sort_values(by="score",ascending=True)
-    df["rang"] = np.arange(1,len(ytrue)+1)
+    df["rang"] = np.arange(1,len(y_true)+1)
     # Somme des rangs de chaque groupe
     srang_moins, srang_plus = df.pivot_table(index='y',values="rang",aggfunc="sum").values[:,0]
     # Statistiques

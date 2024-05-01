@@ -30,12 +30,12 @@ def check_heteroscedasticity(self, test = "bp",alpha=0.05,drop=None):
     results : dict
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self.model.__class__ != smt.regression.linear_model.OLS:
-        raise TypeError("'check_heteroscedasticity' currently only works with Gaussian models.")
+        raise TypeError("'check_heteroscedasticity()' currently only works with Gaussian models.")
     
     if test not in ['bp','white','gq']:
         raise ValueError("'test' should be one of 'bp', 'white', 'gq'.")

@@ -84,6 +84,5 @@ def model_performance(self, metrics = "common"):
             res["f1 score"] = f1_score(self)
             res["auc"] = roc_auc_score(self)
 
-        
     result = pd.Series(res.values(),index=[*res.keys()],name="statistics")
     return result

@@ -20,16 +20,16 @@ def check_normality(self,test="shapiro"):
             - 'agostino' : It is based on D'Agostino and Pearson's, test that combines skew and kurtosis to produce an omnibus test of normality.
             - 'kstest' : Perform a Kolmogorov-Smirnov Test
 
-    Returns:
-    -------
+    Return
+    ------
     results : nametuple
                 statistic : flaot
                     The test statistic
                 pvalue : float
                     The p - value for the hypothseis test
 
-    Notes:
-    ------
+    Notes
+    -----
     check_normality()  checks the standardized residuals (or studentized residuals for mixed models) for normal distribution. 
 
     References:
@@ -40,12 +40,12 @@ def check_normality(self,test="shapiro"):
     Jarque, C. and Bera, A. (1980) “Efficient tests for normality, homoscedasticity and serial independence of regression residuals”, 6 Econometric Letters 255-259.
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
 
     if self.model.__class__ != smt.regression.linear_model.OLS:
-        raise TypeError("Checking normality of residuals is only appropriate for linear models.")
+        raise TypeError("'check_normality()' of residuals is only appropriate for linear models.")
     
     if test not in ["shapiro","jarque-bera","agostino","kstest"]:
         raise ValueError("'test' should be one of 'shapiro', 'jarque-bera', 'agostino', 'kstest'")

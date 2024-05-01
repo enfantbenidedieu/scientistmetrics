@@ -32,7 +32,7 @@ def check_autocorrelation(self,test="dw",nlags=None,maxiter=100):
     Notes : See  http://web.vu.lt/mif/a.buteikis/wp-content/uploads/PE_Book/4-8-Multiple-autocorrelation.html
 
     Author(s)
-    --------
+    ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if test == "dw":

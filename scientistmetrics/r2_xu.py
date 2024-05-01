@@ -25,6 +25,6 @@ def r2_xu(self):
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self.model.__class__ != smt.regression.linear_model.OLS:
-        raise TypeError("'r2_xu' only applied to an object of class OLS.")
+        raise TypeError("'r2_xu()' only applied to an object of class OLS.")
     
     return 1 - np.var(self.resid,ddof=0)/np.var(self.model.endog,ddof=0)

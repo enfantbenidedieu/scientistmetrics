@@ -25,6 +25,8 @@ from .r2_nagelkerke import r2_nagelkerke
 # Compare performance
 def compare_performance(model=list()):
     """
+    Compare performance of different models
+    ---------------------------------------
     
     Parameters
     ----------

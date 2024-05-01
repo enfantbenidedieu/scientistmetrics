@@ -37,17 +37,13 @@ def rmse(self=None, y_true=None, y_pred=None,normalized=False):
     ---------
     Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
-    if self is None:
-        ytrue = y_true
-        ypred = y_pred
-    else:
+    if self is not None:
         if self.model.__class__ != smt.regression.linear_model.OLS:
             raise TypeError("'self' must be an object of class OLS")
-        ytrue = self.model.endog
-        ypred = self.predict()
+        y_true, y_pred = self.model.endog, self.predict()
     # Compute RMSE value
-    rmse_val = metrics.mean_squared_error(y_true=ytrue,y_pred=ypred,squared=False)
+    rmse_val = metrics.mean_squared_error(y_true=y_true,y_pred=y_pred,squared=False)
 
     if normalized:
-        rmse_val = rmse_val/(max(ytrue) - min(ytrue))
+        rmse_val = rmse_val/(max(y_true) - min(y_true))
     return rmse_val

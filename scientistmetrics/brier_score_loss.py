@@ -18,20 +18,20 @@ def brier_score_loss(self=None,y_true=None,y_prob=None):
     y_score : array-like of shape (n_samples,) , default =None.
             Probabilities of the positive class.
 
-    Returns:
-    -------
+    Return
+    ------
     score : float.
             Brier score loss.
+    
+    Author(s)
+    ---------
+    Duvérier DJIFACK ZEBAZE duverierdjifack@gmail.com
     """
     if self is None:
-        n_label = len(np.unique(y_true))
-        if n_label != 2:
-            raise TypeError("'brier_score_loss' only applied for binary classification")
-        ytrue = y_true
-        yprob = y_prob
+        if len(np.unique(y_true)) != 2:
+            raise TypeError("'brier_score_loss()' only applied for binary classification")
     elif self is not None:
         if self.model.__class__ != smt.discrete.discrete_model.Logit:
             raise TypeError("'self' must be an object of class Logit")
-        ytrue = self.model.endog
-        yprob = self.predict()
-    return metrics.brier_score_loss(y_true=ytrue,y_prob=yprob)
+        y_true, y_prob = self.model.endog, self.predict()
+    return metrics.brier_score_loss(y_true=y_true,y_prob=y_prob)
