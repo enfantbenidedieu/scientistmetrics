@@ -62,6 +62,6 @@ from .rstandard import rstandard
 from .rstudent import rstudent
 
 __version__ = "0.0.4"
-__name__ = "discrimintools"
+__name__ = "scientistmetrics"
 __author__ = 'Duvérier DJIFACK ZEBAZE'
-__email__ = 'duverierdjifack@gmail.com' 
+__email__ = 'duverierdjifack@gmail.com'
