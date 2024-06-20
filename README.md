@@ -50,7 +50,7 @@ scientistmetrics provides multiples functions for :
     * For **regression** : R2 score,  (root) mean square error, mean absolute error, median absolute error, etc...
 
 7. **Others** : 
-    * Model vompare
+    * Model comparison
     * Combination analysis (from model with $1$ variable to model with $p$ variables)
     * Association between qualitatives variables : Chi2, Cramer's V, Tschuprow's T
 
