@@ -2,9 +2,6 @@
     <img src="./figures/scientistmetrics.svg" alt="scientistmetrics" height="50%"/>
 </center>
 
-<br>
-<br>
-
 [![Downloads](https://static.pepy.tech/badge/scientistmetrics)](https://pepy.tech/project/scientistmetrics)
 
 # scientistmetrics : Assessing model quality and diagnostics
