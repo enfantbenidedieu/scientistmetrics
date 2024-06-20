@@ -1,44 +1,55 @@
-# scientistmetrics : python library for model metrics
+<center>
+    <img src="./figures/scientistmetrics.png" alt="centered image" height="50%"/>
+</center>
 
-## About scientistmetrics
+[![Downloads](https://static.pepy.tech/badge/scientistmetrics)](https://pepy.tech/project/scientistmetrics)
+
+# scientistmetrics : Assessing model quality and diagnostics
 
 scientistmetrics is a Python package for metrics and scoring : quantifying the quality of predictions
 
 ## Why scientistmetrics?
 
-### Measure of association with categoricals variables
+scientistmetrics provides multiples functions for :
 
-scientistmetrics provides the option for computing one of six measures of association between two nominal variables from the data given in a 2d contingency table:
+1. **Residuals :**
+    * Estimation residuals
+    * Standardized residuals
+    * Studentized residuals
 
-* Chi - squard test : [https://en.wikipedia.org/wiki/Chi-squared_test](https://en.wikipedia.org/wiki/Chi-squared_test)
-* Cramer's V : [https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V](https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V)
-* Tschuprow's T : [https://en.wikipedia.org/wiki/Tschuprow%27s_T](https://en.wikipedia.org/wiki/Tschuprow%27s_T)
-* G-test : [https://en.wikipedia.org/wiki/G-test](https://en.wikipedia.org/wiki/G-test)
-* Phi coefficient : [https://en.wikipedia.org/wiki/Phi_coefficient](https://en.wikipedia.org/wiki/Phi_coefficient)
-* Pearson contingence coefficient : [https://www.statisticshowto.com/contingency-coefficient/](https://www.statisticshowto.com/contingency-coefficient/)
+2. **Normaliry tests :**
+    * Shapiro - Wilk
+    * Jarque - Bera
+    * Agostino
+    * Kolmogorov - Smirnov
 
-### Classification metrics
+3. **Autocorrelation tests :**
+    * Durbin - Watson test
+    * Breusch - Godfrey test
+    * Newey - West HAC test
+    * Feasible GLS - Cochrane - Orcutt test
+    - Ljung - Box test
 
-scientistmetrics provides metrics for classification problem :
+4. **Heteroscedasticity tests :**
+    * Breusch - Pagan test
+    * White test
+    * Goldfeld - Quandt test
 
-* accuracy score
-* f1 score
-* precision
-* recall
-* etc...
+5. **Others tests :**
+    * Likelihood ratio test
+    * Hosmer - Lemeshow test
+    * Mann - Whitney test
+    * Bartlett sphericity test
+    * Overdispersion test (for poisson regression model)
 
-### Regression metrics
+6. **Metrics of performance :**
+    * For **classification** : accuracy, average precision score, balanced accuracy score, F1 score, precision, recall,, auc, ROC Curve, etc...
+    * For **regression** : R2 score,  (root) mean square error, mean absolute error, median absolute error, etc...
 
-scientistmetrics provides metrics for regression problem :
-
-* Rsquared
-* Adjusted Rsquared
-* Mean squared error
-* etc...
-
-### Powerset model
-
-scientistmetrics provides a function that gives a set of all subsets model.
+7. **Others** : 
+    * Model vompare
+    * Combination analysis (from model with $1$ variable to model with $p$ variables)
+    * Association between qualitatives variables : Chi2, Cramer's V, Tschuprow's T
 
 Notebook is availabled.
 
@@ -48,7 +59,7 @@ Notebook is availabled.
 
 scientistmetrics requires :
 
-```
+```python
 python >=3.10
 numpy >=1.26.4
 pandas >=2.2.2
@@ -60,11 +71,14 @@ scipy >=1.10.1
 
 ## User installation
 
-You can install scientistmetrics using `pip` :
+You can install scientistmetrics using pip :
 
-```
+```python
 pip install scientistmetrics
 ```
+
+
+
 
 ## Author(s)
 
