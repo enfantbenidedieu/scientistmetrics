@@ -14,7 +14,7 @@ def check_normality(self,test="shapiro"):
     ----------
     self : an instance of class OLS
 
-    test : {'shapiro','jarque-bera','agostino'}, default = 'shapiro'
+    test : {'shapiro','jarque-bera','agostino','kstest'}, default = 'shapiro'
             - 'shapiro' : Perform the Shapiro-Wilk test for normality.
             - 'jarque-bera' : Perform the Jarque-Bera goodness of fit test on sample data.
             - 'agostino' : It is based on D'Agostino and Pearson's, test that combines skew and kurtosis to produce an omnibus test of normality.

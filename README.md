@@ -1,5 +1,5 @@
 <center>
-    <img src="./figures/scientistmetrics.svg" alt="centered image" height="50%"/>
+    <img src="./figures/scientistmetrics.svg" alt="scientistmetrics" height="50%"/>
 </center>
 
 <br>
