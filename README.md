@@ -1,8 +1,16 @@
-<center>
-    <img src="./figures/scientistmetrics.svg" alt="scientistmetrics" height="50%"/>
-</center>
+<p align="center">
+    <img src="./figures/scientistmetrics.svg" height=300></img>
+</p>
 
+<div align="center">
+
+[![GitHub](https://shields.io/badge/license-MIT-informational)](https://github.com/enfantbenidedieu/scientistmetrics/blob/master/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/scientistmetrics.svg?color=dark-green)](https://pypi.org/project/scientistmetrics/)
 [![Downloads](https://static.pepy.tech/badge/scientistmetrics)](https://pepy.tech/project/scientistmetrics)
+[![Downloads](https://static.pepy.tech/badge/scientistmetrics/month)](https://pepy.tech/project/scientistmetrics)
+[![Downloads](https://static.pepy.tech/badge/scientistmetrics/week)](https://pepy.tech/project/scientistmetrics)
+
+</div>
 
 # scientistmetrics : Assessing model quality and diagnostics
 
